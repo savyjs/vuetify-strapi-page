@@ -18,16 +18,24 @@ function loadLocale(code) {
     localize(code, locale);
   });
 }
+import VuePlyr from 'vue-plyr'
+import 'vue-plyr/dist/vue-plyr.css'
+
+import LottiePlayer from 'lottie-player-vue';
 const t = (val) => _.isString(val) ? val.replace(/_/g, ' ') : val
+
 const ComponentLibrary = {
   install(Vue, options = {}) {
     try {
       Vue.use(wysiwyg, {});
       Vue.component('ValidationProvider', ValidationProvider);
-      Vue.component('ValidationObserver', ValidationObserver);
+      Vue.use(VuePlyr, {
+        plyr: {}
+      })
+      Vue.use(LottiePlayer)
       let locale = _.get(moduleOptions, 'locale', 'en-EN').substring(0, 2)
       loadLocale(locale)
-      Vue.set(Vue.prototype, 'vsp', {...moduleOptions,Helper});
+      Vue.set(Vue.prototype, 'vsp', {...moduleOptions,Helper,'$Helper':Helper});
       for (const componentName in components.default) {
         let component = components.default[componentName]
         try {
@@ -45,8 +53,8 @@ const ComponentLibrary = {
 
 export default async (ctx, inject) => {
 
-  inject('vsd', {...moduleOptions,Helper})
-  ctx.vsd = {...moduleOptions,Helper}
+  inject('vsd', {...moduleOptions,Helper,'$Helper':Helper})
+  ctx.vsd = {...moduleOptions,Helper,'$Helper':Helper}
 
   try {
     ctx.store.registerModule('vsp', VspStore)

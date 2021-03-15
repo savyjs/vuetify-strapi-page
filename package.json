@@ -50,13 +50,14 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@mdi/font": "^5.9.55",
     "@mdi/js": "^5.9.55",
+    "@nuxt/content": "^1.14.0",
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.0",
-    "@nuxt/content": "^1.14.0",
     "@nuxtjs/strapi": "^0.3.0",
     "font-awesome": "4.7.0",
     "lodash": "^4.17.20",
     "lodash-deep": "^1.6.0",
+    "lottie-player-vue": "^0.0.16",
     "markdown": "^0.5.0",
     "material-design-icons-iconfont": "^5.0.1",
     "material-icons": "^0.3.1",
@@ -67,6 +68,7 @@
     "qs": "^6.9.6",
     "vee-validate": "^3.4.5",
     "vue-json-excel": "^0.3.0",
+    "vue-plyr": "^7.0.0",
     "vue-wysiwyg": "^1.7.2"
   },
   "publishConfig": {
