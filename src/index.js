@@ -152,14 +152,21 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
       options
     })
 
+    this.addPlugin({
+      fileName: 'clientPlugin.js',
+      mode: 'client',
+      src: path.resolve(__dirname, 'clientPlugin.js'),
+      options
+    })
+
     this.addLayout({
       name: "vsp",
       src: path.resolve(__dirname, 'layout/vsp.vue'),
     })
 
     this.addLayout({
-      name: "vsp-simple",
-      src: path.resolve(__dirname, 'layout/vsp-simple.vue'),
+      name: "vspSimple",
+      src: path.resolve(__dirname, 'layout/vspSimple.vue'),
     })
 
     this.addLayout({
