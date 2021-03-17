@@ -141,8 +141,20 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
 
 
     this.addTemplate({
-      fileName: 'store/vsp.js',
-      src: path.resolve(__dirname, 'store/vsp.js'),
+      fileName: 'store/Vsp.js',
+      src: path.resolve(__dirname, 'store/Vsp.js'),
+      options
+    })
+
+    this.addTemplate({
+      fileName: 'store/VspCart.js',
+      src: path.resolve(__dirname, 'store/VspCart.js'),
+      options
+    })
+
+    this.addTemplate({
+      fileName: 'store/VspShopping.js',
+      src: path.resolve(__dirname, 'store/VspShopping.js'),
       options
     })
 

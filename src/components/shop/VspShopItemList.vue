@@ -78,7 +78,12 @@
     // },
   ];
   export default {
-    props: ['value', 'limit', 'readmore', 'btns', 'rate', 'wordLimit', 'baseUrl', 'modalText', 'modalIcon', 'btnText', 'btnIcon','cartIcon','cartText', 'root'],
+    props: ['value', 'limit', 'readmore', 'btns', 'rate', 'wordLimit', 'baseUrl', 'modalText', 'modalIcon', 'btnText', 'btnIcon', 'cartIcon', 'cartText', 'root'],
+    data() {
+      return {
+        nullPhoto
+      }
+    },
     created() {
       this._ = _;
     },

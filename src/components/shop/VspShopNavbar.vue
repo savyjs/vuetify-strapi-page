@@ -16,7 +16,7 @@
       <img :src="logo" class="logo" width="100px"/>
     </span>
       </nuxt-link>
-      <nuxt-link to="/cart" class="snipcart-checkout flex items-center">
+      <nuxt-link :to="vsp.shop.cart || `/cart`" class="snipcart-checkout flex items-center">
         <v-icon>shopping_cart</v-icon>
         <span class="snipcart-total-price ml-3 font-semibold text-sm text-indigo-500">
                     {{cartBadge}}
@@ -38,17 +38,16 @@
     },
     computed: {
       cartBadge() {
-        let items = this.$store.state.vspCart.items;
+        let items = this.$store.state.vspCart.items || [];
         return items.length;
       }
     },
     created() {
       this.$nuxt.$on('addToCart', (item) => {
         this.addToCart(item);
-        alert('added');
       })
     },
-    methods:{
+    methods: {
       async addToCart(item) {
         try {
           let result = await this.$store.dispatch('vspCart/addToCart', item);

@@ -46,12 +46,12 @@ const ComponentLibrary = {
 
 export default async (ctx, inject) => {
 
-  inject('vsd', {...moduleOptions,Helper,'$Helper':Helper})
-  ctx.vsd = {...moduleOptions,Helper,'$Helper':Helper}
+  inject('vsp', {...moduleOptions,Helper,'$Helper':Helper})
+  ctx.vsp = {...moduleOptions,Helper,'$Helper':Helper}
 
   try {
-    ctx.store.registerModule('vspCart', VspStore)
-    ctx.store.registerModule('VspCart', VspCartStore)
+    ctx.store.registerModule('vsp', VspStore)
+    ctx.store.registerModule('vspCart', VspCartStore)
   } catch (e) {
     console.error({e}, 'error on loading store files')
   }
