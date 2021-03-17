@@ -170,6 +170,11 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     })
 
     this.addLayout({
+      name: "vspShop",
+      src: path.resolve(__dirname, 'layout/vspShop.vue'),
+    })
+
+    this.addLayout({
       name: "vspAuth",
       src: path.resolve(__dirname, 'layout/vspAuth.vue'),
     })

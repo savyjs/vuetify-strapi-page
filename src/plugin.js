@@ -3,7 +3,8 @@ import Vue from 'vue'
 import moduleOptions from './options'
 // import JsonExcel from "vue-json-excel";
 import Helper from './assets/helper'
-import VspStore from './store/vsp'
+import VspStore from './store/Vsp'
+import VspCartStore from './store/VspCart'
 import * as components from "./components/component-vsp";
 import {ValidationProvider, ValidationObserver, extend, localize} from 'vee-validate/dist/vee-validate.full.esm';
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
@@ -49,7 +50,8 @@ export default async (ctx, inject) => {
   ctx.vsd = {...moduleOptions,Helper,'$Helper':Helper}
 
   try {
-    ctx.store.registerModule('vsp', VspStore)
+    ctx.store.registerModule('vspCart', VspStore)
+    ctx.store.registerModule('VspCart', VspCartStore)
   } catch (e) {
     console.error({e}, 'error on loading store files')
   }

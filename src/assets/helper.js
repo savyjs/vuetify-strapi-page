@@ -147,6 +147,10 @@ export default {
     return null;
   }, eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;';
+  },
+  shorten(str, maxLen = 20, separator = ' ') {
+    if (str.length <= maxLen) return str;
+    return str.substr(0, str.lastIndexOf(separator, maxLen)) + ' ...';
   }
 
 }
