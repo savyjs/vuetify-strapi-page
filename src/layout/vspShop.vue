@@ -1,9 +1,11 @@
 <template>
   <v-app>
-    header
-    <VspShopHeader/>
+    <v-container>
+      <VspShopHeader :menu-items="menuItems"/>
+      <VspLoginModal/>
+      <VspRegisterModal/>
+    </v-container>
     <v-main>
-      main:
       <nuxt/>
     </v-main>
   </v-app>
@@ -12,7 +14,14 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        menuItems: []
+      }
+    },
+    mounted() {
+      this.$axios.$get(this.vsp.shop.categoriesUrl).then(res => {
+        this.menuItems = res;
+      })
     }
   }
 </script>
