@@ -12,16 +12,21 @@
             {{item.name}}
           </v-btn>
         </template>
-        <v-card tile>
+        <v-card tile v-if="item.categories.length">
           <v-responsive :aspect-ratio="16/9">
-            <div class="d-flex  flex-wrap" v-for="i in rand()" :key="i">
-              <v-card flat :to="`/#`+j" v-for="j in rand()" :key="j">
-                <small>
+            <v-row class="d-flex flex-wrap" no-gutters>
+              <v-col v-for="(subItem,j) in item.categories" :key="j">
+                <v-btn tile text block :to="rootLink + `/#`+j">
                   <v-icon class="mx-1" small>menu</v-icon>
-                  {{j}}
-                </small>
-              </v-card>
-            </div>
+                  <b>{{subItem.name}}</b>
+                </v-btn>
+                <v-btn tile text block :to="rootLink + `/#`+i" v-for="subSubItem in subItem.categories"
+                       v-if="subItem.categories" :key="i">
+                  <v-icon class="mx-1" small>menu</v-icon>
+                  {{subSubItem.name}}
+                </v-btn>
+              </v-col>
+            </v-row>
           </v-responsive>
         </v-card>
       </v-menu>
@@ -30,7 +35,7 @@
 </template>
 <script>
   export default {
-    props: ['value'],
+    props: ['value', 'rootLink'],
     data() {
       return {}
     },

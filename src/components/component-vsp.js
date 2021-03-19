@@ -1,6 +1,7 @@
 import VspVCardHeader from './ui/VspVCardHeader'
 import VspIcons8 from './ui/VspIcons8'
 import VspLoader from './ui/VspLoader'
+import VspStripe from './ui/VspStripe'
 
 import VspLoginModal from './auth/VspLoginModal'
 import VspRegisterModal from './auth/VspRegisterModal'
@@ -19,6 +20,7 @@ import VspShopMegaMenu from './../components/shop/VspShopMegaMenu'
 
 
 export default {
+  VspStripe,
   VspShopMegaMenu,
   VspLoginModal,
   VspRegisterModal,
