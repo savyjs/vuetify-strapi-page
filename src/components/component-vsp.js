@@ -17,9 +17,11 @@ import VspProducts from './../components/shop/VspProducts'
 import VspItemInCart from './../components/shop/VspItemInCart'
 import VspShopItemList from './../components/shop/VspShopItemList'
 import VspShopMegaMenu from './../components/shop/VspShopMegaMenu'
+import VspShopSearch from './../components/shop/VspShopSearch'
 
 
 export default {
+  VspShopSearch,
   VspStripe,
   VspShopMegaMenu,
   VspLoginModal,

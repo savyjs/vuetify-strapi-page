@@ -1,7 +1,12 @@
 <template>
   <v-app>
     <v-container>
-      <VspShopHeader :menu-items="menuItems"/>
+      <VspShopHeader
+        :product-root-link="productLinkRoot"
+        :search-url="searchUrl"
+        :root-link="rootLink"
+        :menu-items="menuItems"
+      />
       <VspLoginModal/>
       <VspRegisterModal/>
     </v-container>
@@ -12,6 +17,8 @@
 </template>
 
 <script>
+  import _ from 'lodash'
+
   export default {
     data() {
       return {
@@ -22,6 +29,17 @@
       this.$axios.$get(this.vsp.shop.categoriesUrl).then(res => {
         this.menuItems = res;
       })
+    },
+    computed: {
+      rootLink() {
+        return _.get(this, 'vsp.shop.categories', '/categories')
+      },
+      productLinkRoot() {
+        return _.get(this, 'vsp.shop.products', '/product')
+      },
+      searchUrl() {
+        return _.get(this, 'vsp.shop.productsUrl', '/products')
+      }
     }
   }
 </script>

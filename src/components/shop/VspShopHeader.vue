@@ -1,7 +1,10 @@
 <template>
   <v-row>
-    <v-col class="d-flex align-space-around">
+    <v-col cols="3" lg="2" class="d-flex align-center justify-start">
       Home
+    </v-col>
+    <v-col class="d-flex align-center justify-start">
+      <VspShopSearch :search-url="searchUrl" :root-link="productRootLink" />
     </v-col>
     <v-col cols="12" md="3" class="d-flex justify-end align-center">
       <v-btn class="mx-1 px-1" color="grey" small outlined @click="$nuxt.$emit('VspLoginModal',true)">
@@ -12,13 +15,13 @@
       <VspShopCart/>
     </v-col>
     <v-col cols="12">
-      <VspShopMegaMenu v-model="menuItems"/>
+      <VspShopMegaMenu v-model="menuItems" :root-link="rootLink"/>
       <VspStripe v-if="false" v-model="menuItems"/>
     </v-col>
   </v-row>
 </template>
 <script>
   export default {
-    props: ['menuItems']
+    props: ['menuItems', 'rootLink','searchUrl','productRootLink']
   }
 </script>
