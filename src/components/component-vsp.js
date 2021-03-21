@@ -19,8 +19,25 @@ import VspShopItemList from './../components/shop/VspShopItemList'
 import VspShopMegaMenu from './../components/shop/VspShopMegaMenu'
 import VspShopSearch from './../components/shop/VspShopSearch'
 
+import VspBlogSearchInput from './../components/blog/VspBlogSearchInput'
+import VspBlogHeader from './../components/blog/VspBlogHeader'
+import VspBlogShowTagPage from './../components/blog/VspBlogShowTagPage'
+import VspBlogShowContent from './../components/blog/VspBlogShowContent'
+import VspBlogShowAuthorPage from './../components/blog/VspBlogShowAuthorPage'
+import VspBlogPrevNext from './../components/blog/VspBlogPrevNext'
+import VspBlogAuthor from './../components/blog/VspBlogAuthor'
+import VspBlogShowList from './../components/blog/VspBlogShowList'
+
 
 export default {
+  VspBlogShowList,
+  VspBlogShowTagPage,
+  VspBlogShowContent,
+  VspBlogShowAuthorPage,
+  VspBlogPrevNext,
+  VspBlogAuthor,
+  VspBlogSearchInput,
+  VspBlogHeader,
   VspShopSearch,
   VspStripe,
   VspShopMegaMenu,

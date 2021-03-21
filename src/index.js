@@ -1,9 +1,9 @@
 import webpack from "webpack";
+import {sortRoutes} from '@nuxt/utils'
 
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
-
 const getFiles = path => {
   const files = []
   for (const file of fs.readdirSync(path)) {
@@ -102,15 +102,13 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
       });
     }
 
-
+    // This will be called before Nuxt generates your pages
     let contentOptions = _.get(this, 'nuxt.options.content', {});
-    this.addModule({
-      src: "@nuxtjs/content",
-      options: {
-        ...contentOptions
-      }
-    });
+    // this.addModule({
+    //   src: "@nuxt/content"
+    // });
 
+    // this.nuxt.hook('generate:cache:ignore', ignore => ignore.push('content'))
 
     this.addTemplate({
       fileName: 'assets/vsp.png',
@@ -164,6 +162,54 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
       options
     })
 
+    let blogRoutes = {
+      home: "/blog",
+      contents: "/blog",
+      tags: "/blog/tags",
+      logo: "/blog/logo.png",
+      title: "Blog",
+      menu: [{
+        text: 'Home',
+        link: '/blog'
+      }],
+      ...moduleOptions.blog
+    };
+
+    this.extendRoutes.extendRoutes(
+      (routes, resolve) => {
+        const blogRoute = {};
+        blogRoutes.Home = {
+          name: 'blogHome',
+          chunkName: 'blogHome',
+          path: blogRoutes.home,
+          component: resolve(__dirname, './src/components/blog/VspBlogShowList.vue'),
+        }
+        blogRoutes.Posts = {
+          name: 'blogPosts',
+          chunkName: 'blogPosts',
+          path: blogRoutes.contents,
+          component: resolve(__dirname, './src/components/blog/VspBlogShowList.vue'),
+        }
+        blogRoutes.Post = {
+          name: 'blogPost',
+          chunkName: 'blogPost',
+          path: blogRoutes.contents + '/:slug',
+          component: resolve(__dirname, './src/components/blog/VspBlogShowContent.vue'),
+        }
+        blogRoutes.Tags = {
+          name: 'blogTags',
+          chunkName: 'blogTags',
+          path: blogRoutes.tags + '/:slug',
+          component: resolve(__dirname, './src/components/blog/VspBlogShowTagPage.vue'),
+        }
+
+        for (const item in blogRoute) {
+          console.log({item})
+          routes.unshift(item)
+        }
+      }
+    );
+
     this.addPlugin({
       fileName: 'clientPlugin.js',
       mode: 'client',
@@ -184,6 +230,11 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     this.addLayout({
       name: "vspShop",
       src: path.resolve(__dirname, 'layout/vspShop.vue'),
+    })
+
+    this.addLayout({
+      name: "vspBlog",
+      src: path.resolve(__dirname, 'layout/vspBlog.vue'),
     })
 
     this.addLayout({

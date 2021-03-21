@@ -11,7 +11,7 @@ import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loade
 import './assets/styles.css' // Ensure you are using css-loader
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 // import '@fontawesome/fontawesome-free/css/all.css'
-import  VueStripeMenu from 'vue-stripe-menu'
+import VueStripeMenu from 'vue-stripe-menu'
 import 'font-awesome/css/font-awesome.min.css';
 import 'material-icons/iconfont/material-icons.css';
 import wysiwyg from "vue-wysiwyg";
@@ -21,6 +21,7 @@ function loadLocale(code) {
     localize(code, locale);
   });
 }
+
 const t = (val) => _.isString(val) ? val.replace(/_/g, ' ') : val
 
 const ComponentLibrary = {
@@ -31,7 +32,7 @@ const ComponentLibrary = {
       Vue.component('ValidationProvider', ValidationProvider);
       let locale = _.get(moduleOptions, 'locale', 'en-EN').substring(0, 2)
       loadLocale(locale)
-      Vue.set(Vue.prototype, 'vsp', {...moduleOptions,Helper,'$Helper':Helper});
+      Vue.set(Vue.prototype, 'vsp', {...moduleOptions, Helper, '$Helper': Helper});
       for (const componentName in components.default) {
         let component = components.default[componentName]
         try {
@@ -49,8 +50,9 @@ const ComponentLibrary = {
 
 export default async (ctx, inject) => {
 
-  inject('vsp', {...moduleOptions,Helper,'$Helper':Helper})
-  ctx.vsp = {...moduleOptions,Helper,'$Helper':Helper}
+  inject('vsp', {...moduleOptions, Helper, '$Helper': Helper})
+  ctx.vsp = {...moduleOptions, Helper, '$Helper': Helper}
+
 
   try {
     ctx.store.registerModule('vsp', VspStore)
