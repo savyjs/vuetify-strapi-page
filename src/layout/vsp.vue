@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <v-main>
-      <alert/>
-      <access-alert/>
+      <VspAlert/>
+      <VspAccessAlert/>
       <nuxt/>
-      <snackbar/>
-      <loader/>
+      <VspSnackbar/>
+      <VspLoader/>
     </v-main>
   </v-app>
 </template>
@@ -13,8 +13,7 @@
 <script>
   export default {
     data() {
-      return {
-      }
+      return {}
     }
   }
 </script>

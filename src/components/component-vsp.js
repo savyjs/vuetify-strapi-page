@@ -1,4 +1,14 @@
 import VspVCardHeader from './ui/VspVCardHeader'
+import VspSnackbar from './VspSnackbar'
+import VspSideMenu from './VspSideMenu'
+import VspSettings from './VspSettings'
+import VspNotifications from './VspNotifications'
+import VspBreadcrumb from './VspBreadcrumb'
+import VspAlert from './VspAlert'
+import VspAccount from './VspAccount'
+import VspAccessAlert from './VspAccessAlert'
+
+
 import VspIcons8 from './ui/VspIcons8'
 import VspLoader from './ui/VspLoader'
 import VspStripe from './ui/VspStripe'
@@ -30,6 +40,14 @@ import VspBlogShowList from './../components/blog/VspBlogShowList'
 
 
 export default {
+  VspSnackbar,
+  VspSideMenu,
+  VspSettings,
+  VspNotifications,
+  VspBreadcrumb,
+  VspAlert,
+  VspAccount,
+  VspAccessAlert,
   VspBlogShowList,
   VspBlogShowTagPage,
   VspBlogShowContent,
