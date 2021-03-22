@@ -15,12 +15,12 @@ const getFiles = path => {
   return files
 }
 
-export default async function VuetifyStrapiDashboardModule(moduleOptions) {
+export default async function VuetifyStrapiPageModule(moduleOptions) {
 
   try {
     let listOfFiles = getFiles(path.resolve(__dirname, './components'));
 
-    const options = {
+    let options = {
       rtl: false,
       builder: {
         form: '/forms',
@@ -45,8 +45,8 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     options.API_URL = baseURL;
 
     this.addPlugin({
-      fileName: 'options.js',
-      src: path.resolve(__dirname, 'options.js'),
+      fileName: 'VspOptions.js',
+      src: path.resolve(__dirname, 'VspOptions.js'),
       options
     })
 
@@ -65,7 +65,7 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
       });
     }
 
-    this.nuxt.options.store = true
+    _.set(this, 'nuxt.options.store', true);
 
     // this.nuxt.options.build.plugins = [lodashPlugin];
 
@@ -121,8 +121,8 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     })
 
     this.addTemplate({
-      fileName: 'assets/styles.css',
-      src: path.resolve(__dirname, 'assets/styles.css')
+      fileName: 'assets/VspStyles.css',
+      src: path.resolve(__dirname, 'assets/VspStyles.css')
     })
 
     this.addTemplate({
@@ -132,8 +132,8 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     })
 
     this.addTemplate({
-      fileName: 'assets/helper.js',
-      src: path.resolve(__dirname, 'assets/helper.js'),
+      fileName: 'assets/VspHelper.js',
+      src: path.resolve(__dirname, 'assets/VspHelper.js'),
       options
     })
 
@@ -157,8 +157,8 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     })
 
     this.addPlugin({
-      fileName: 'plugin.js',
-      src: path.resolve(__dirname, 'plugin.js'),
+      fileName: 'VspPlugin.js',
+      src: path.resolve(__dirname, 'VspPlugin.js'),
       options
     })
 
@@ -175,7 +175,7 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
       ...moduleOptions.blog
     };
 
-    this.extendRoutes.extendRoutes(
+    this.extendRoutes(
       (routes, resolve) => {
         const blogRoute = {};
         blogRoutes.Home = {
@@ -211,9 +211,9 @@ export default async function VuetifyStrapiDashboardModule(moduleOptions) {
     );
 
     this.addPlugin({
-      fileName: 'clientPlugin.js',
+      fileName: 'VspClientPlugin.js',
       mode: 'client',
-      src: path.resolve(__dirname, 'clientPlugin.js'),
+      src: path.resolve(__dirname, 'VspClientPlugin.js'),
       options
     })
 

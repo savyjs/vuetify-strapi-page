@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import Vue from 'vue'
-import moduleOptions from './options'
+import moduleOptions from './VspOptions'
 // import JsonExcel from "vue-json-excel";
-import Helper from './assets/helper'
+import Helper from './assets/VspHelper'
 import VspStore from './store/Vsp'
 import VspCartStore from './store/VspCart'
 import * as components from "./components/component-vsp";
