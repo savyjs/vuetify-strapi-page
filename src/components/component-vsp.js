@@ -12,6 +12,7 @@ import VspAccessAlert from './VspAccessAlert'
 import VspIcons8 from './ui/VspIcons8'
 import VspLoader from './ui/VspLoader'
 import VspStripe from './ui/VspStripe'
+import VspLottie from './ui/VspLottie'
 
 import VspLoginModal from './auth/VspLoginModal'
 import VspRegisterModal from './auth/VspRegisterModal'
@@ -40,6 +41,7 @@ import VspBlogShowList from './../components/blog/VspBlogShowList'
 
 
 export default {
+  VspLottie,
   VspSnackbar,
   VspSideMenu,
   VspSettings,
