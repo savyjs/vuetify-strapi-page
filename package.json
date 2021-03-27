@@ -1,7 +1,7 @@
 {
   "name": "vuetify-strapi-page",
   "description": "vuetify dashboard page matched to strapi last version",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "author": "Ehsan Afshari @savyjs <savvyversa@gmail.com>",
   "license": "MIT",
   "keywords": [
