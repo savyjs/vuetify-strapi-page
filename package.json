@@ -1,7 +1,7 @@
 {
   "name": "vuetify-strapi-page",
   "description": "vuetify dashboard page matched to strapi last version",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "author": "Ehsan Afshari @savyjs <savvyversa@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -38,7 +38,8 @@
     "types/"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.config.js --hot",
+    "postinstall": "node ./src/postinstall.js"
   },
   "devDependencies": {
     "fs": "^0.0.1-security"
