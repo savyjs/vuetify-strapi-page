@@ -8,11 +8,11 @@ import VspAlert from './VspAlert'
 import VspAccount from './VspAccount'
 import VspAccessAlert from './VspAccessAlert'
 
-
 import VspIcons8 from './ui/VspIcons8'
 import VspLoader from './ui/VspLoader'
 import VspStripe from './ui/VspStripe'
 import VspLottie from './ui/VspLottie'
+import VspDashboardBox from './ui/VspDashboardBox'
 
 import VspLoginModal from './auth/VspLoginModal'
 import VspRegisterModal from './auth/VspRegisterModal'
@@ -39,8 +39,8 @@ import VspBlogPrevNext from './../components/blog/VspBlogPrevNext'
 import VspBlogAuthor from './../components/blog/VspBlogAuthor'
 import VspBlogShowList from './../components/blog/VspBlogShowList'
 
-
 export default {
+  VspDashboardBox,
   VspLottie,
   VspSnackbar,
   VspSideMenu,

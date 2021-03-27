@@ -65,10 +65,7 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
       });
     }
 
-    _.set(this, 'nuxt.options.store', true);
-
-    // this.nuxt.options.build.plugins = [lodashPlugin];
-
+    this.nuxt.options.store = true;
     if (_.get(options, 'i18n', true)) {
       let i18nOption = _.get(this, 'nuxt.options.i18n', {});
       let i18nOptionLocales = _.get(this, 'nuxt.options.i18n.locales', {});
