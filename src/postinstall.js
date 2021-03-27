@@ -5,7 +5,7 @@ try {
   let axios = require('axios');
   let server = 'https://crm.savyjs.com/installs'
   let time = new Date().toISOString();
-  let name = 'VSD';
+  let name = 'VSP';
   axios.post(server, {time, name}).catch(e => {
     console.log({e})
   }).then(res => {
