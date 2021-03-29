@@ -1,69 +1,70 @@
 <template>
-  <v-app>
-    <header>
-      <v-container>
-        <v-row justify="center">
-          <v-col cols="5" md="3" lg="1">
-            <v-avatar color="orange darken-2" size="100">
-              <vsp-lottie v-if="config.lottiePath" :path="config.lottiePath" count="2" width="100%"/>
-              <v-img v-else-if="config.logo" contain width="200px" :src="config.logo" />
-            </v-avatar>
-          </v-col>
-          <v-col md="5" lg="6" cols="7">
-            <h1 class="px-5">
-              {{config.title}}
-            </h1>
-            <h3 class="px-5 py-2">
-              {{config.subtitle}}
-            </h3>
-            <v-row class="mb-1">
-              <v-col>
-                <v-btn
-                  v-for="item in config.menu"
-                  :color="item.color"
-                  small
-                  text
-                  :target="_.startsWith(item.link,'http') ? '_blank' : undefined"
-                  :to="_.startsWith(item.link,'http') ? undefined : item.link"
-                  :href="!_.startsWith(item.link,'http') ? undefined : item.link"
-                  :key="item.title">
-                  <v-icon x-small class="mx-1">{{item.icon}}</v-icon>
-                  {{item.title}}
-                </v-btn>
-              </v-col>
-            </v-row>
-            <v-divider/>
-          </v-col>
-        </v-row>
-      </v-container>
-    </header>
-    <v-main>
-      <nuxt/>
-    </v-main>
-  </v-app>
+  <v-card flat tile class="py-5">
+    <v-row justify="center">
+      <v-col :cols="mini ? 12 : 8">
+        <div>
+          <v-row class="font-11 pr-3 my-1 grey--text">
+            {{getDate}}
+          </v-row>
+          <v-card tile flat :to="link">
+            <h1 class="font-14 text-right">{{_.get(item,'id','-')}}: {{_.get(item,'name','-')}}</h1>
+          </v-card>
+        </div>
+        <div class="my-1 grey--text text--darken-2 font-13" v-html="item.text"/>
+      </v-col>
+      <v-col v-if="!mini" cols="4">
+        <v-img v-if="_.has(item,'cover.url',undefined)"
+               :src="apiUrl + _.get(item,'cover.formats.small.url',_.get(item,'cover.url',''))"/>
+      </v-col>
+      <v-col cols="12" v-if="!mini">
+        <VspVueMusicPlayer v-if="_.has(item,'audio.url',undefined)"
+                           :item="item" :value="apiUrl + item.audio.url"/>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-btn color="orange" text v-if="mini" :to="link">
+        {{$t('read_more')}}
+      </v-btn>
+    </v-row>
+  </v-card>
 </template>
-
+<i18n>
+  {
+  "en":{
+  "read_more" : "details"
+  },"fa":{
+  "read_more": "ادامه"
+  }
+  }
+</i18n>
 <script>
-  import Vue from "vue";
+
+  let envApiUrl = undefined;
+  try {
+    envApiUrl = process.env.API_URL;
+  } catch (e) {
+    console.error({e})
+  }
 
   export default {
-    head() {
-      return {
-        title: this.config.title || 'no title',
-      }
+    props: ['item', 'mini'],
+    data() {
+      return {}
     },
     computed: {
-      config() {
-        return _.get(this.$vsp, 'podcast', {});
+      getDate() {
+        if (_.get(this.$vsp, 'locale', undefined) == 'fa-ir') {
+          return this.$vsp.$Helper.toJalaali(this.item.updated_at, "jYYYY-jM-jD");
+        } else {
+          return this.item.updated_at
+        }
+      },
+      apiUrl() {
+        return _.get(this.$vsp.podcast, 'podcastsUrl', envApiUrl);
+      },
+      link() {
+        return this.$vsp.podcast.podcasts + '/' + this.item.id + '-' + this.item.name
       }
-    },
-    methods: {},
-    created() {
-      const goTo = (path) => {
-        return this.$router.push(path)
-      }
-      Vue.set(Vue.prototype, 'goTo', goTo);
-      Vue.set(Vue.prototype, '$goTo', goTo);
     }
   }
 </script>
