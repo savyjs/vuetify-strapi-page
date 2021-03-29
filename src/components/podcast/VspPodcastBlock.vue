@@ -43,15 +43,14 @@
     props: ['item', 'mini'],
     data() {
       return {
-        apiUrl
       }
     },
     computed: {
       getDate() {
         if (_.get(this.$vsp, 'locale', undefined) == 'fa-ir') {
-          return this.$vsp.$Helper.toJalaali(item.updated_at, "jYYYY-jM-jD");
+          return this.$vsp.$Helper.toJalaali(this.item.updated_at, "jYYYY-jM-jD");
         } else {
-          return item.updated_at
+          return this.item.updated_at
         }
       },
       apiUrl() {
