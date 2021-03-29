@@ -23,11 +23,8 @@
           ..._.get(this, 'options', {})
         }
       },
-      animationData() {
-        return `~/assets/lottie/${this.path}`;
-      },
       animationJSON() {
-        return `/lottie/${this.path}`;
+        return `${this.path}`;
       }
     }
   }

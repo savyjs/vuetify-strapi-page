@@ -6,7 +6,7 @@
           <v-col cols="5" md="3" lg="1">
             <v-avatar color="orange darken-2" size="100">
               <vsp-lottie v-if="config.lottiePath" :path="config.lottiePath" count="2" width="100%"/>
-              <v-img v-elseif="config.logo" contain width="200px" :src="config.logo" />
+              <v-img v-else-if="config.logo" contain width="200px" :src="config.logo" />
             </v-avatar>
           </v-col>
           <v-col md="5" lg="6" cols="7">
