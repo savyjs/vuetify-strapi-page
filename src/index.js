@@ -28,6 +28,17 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
         element: '/elements',
         record: '/records',
       },
+      podcast: {
+        title: 'Podcast Blog',
+        subtitle: 'Our podcast blog',
+        home: '/',
+        logo: undefined,
+        lottiePath: undefined,
+        podcasts: '/podcasts',
+        menu: [
+          {title: 'home', icon: 'fa-home', color: "success darken-2", link: '/'},
+        ],
+      },
       ...moduleOptions
     }
 
@@ -217,6 +228,11 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
     this.addLayout({
       name: "vsp",
       src: path.resolve(__dirname, 'layout/vsp.vue'),
+    })
+
+    this.addLayout({
+      name: "vspPodcastBlog",
+      src: path.resolve(__dirname, 'layout/vspPodcastBlog.vue'),
     })
 
     this.addLayout({

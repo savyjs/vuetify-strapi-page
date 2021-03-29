@@ -39,7 +39,16 @@ import VspBlogPrevNext from './../components/blog/VspBlogPrevNext'
 import VspBlogAuthor from './../components/blog/VspBlogAuthor'
 import VspBlogShowList from './../components/blog/VspBlogShowList'
 
+import VspPodcastBlock from './../components/podcast/VspPodcastBlock'
+import VspPodcastList from './../components/podcast/VspPodcastList'
+import VspVueMusicPlayer from './../components/podcast/VspVueMusicPlayer'
+import VspPodcastShow from './../components/podcast/VspPodcastShow'
+
 export default {
+  VspPodcastShow,
+  VspPodcastBlock,
+  VspPodcastList,
+  VspVueMusicPlayer,
   VspDashboardBox,
   VspLottie,
   VspSnackbar,
