@@ -1,0 +1,13 @@
+$class-slug: font !default
+
+@for $i from 1 through 50
+  .#{$class-slug}-#{$i}
+    font-size: 0px + $i !important
+
+.theme--light
+  .v-btn
+    elevation: 0
+
+.theme--dark
+  .v-btn
+    elevation: 0

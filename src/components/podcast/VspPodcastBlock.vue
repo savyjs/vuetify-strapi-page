@@ -42,15 +42,14 @@
   export default {
     props: ['item', 'mini'],
     data() {
-      return {
-      }
+      return {}
     },
     computed: {
       getDate() {
         if (_.get(this.$vsp, 'locale', undefined) == 'fa-ir') {
           return this.$vsp.$Helper.toJalaali(this.item.updated_at, "jYYYY-jM-jD");
         } else {
-          return this.item.updated_at
+          return this.$vsp.$Helper.toJalaali(this.item.updated_at, "YYYY-M-D") || this.item.updated_at
         }
       },
       apiUrl() {

@@ -9,6 +9,7 @@ import * as components from "./components/component-vsp";
 import {ValidationProvider, ValidationObserver, extend, localize} from 'vee-validate/dist/vee-validate.full.esm';
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import './assets/styles.css' // Ensure you are using css-loader
+import './assets/VspVariables.sass' // Ensure you are using sass-loader
 import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure you are using css-loader
 // import '@fontawesome/fontawesome-free/css/all.css'
 import VueStripeMenu from 'vue-stripe-menu'

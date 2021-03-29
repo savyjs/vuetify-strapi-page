@@ -133,6 +133,10 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
       fileName: 'assets/VspStyles.css',
       src: path.resolve(__dirname, 'assets/VspStyles.css')
     })
+    this.addTemplate({
+      fileName: 'assets/VspVariables.sass',
+      src: path.resolve(__dirname, 'assets/VspVariables.sass')
+    })
 
     this.addTemplate({
       fileName: 'components/component-vsp.js',
