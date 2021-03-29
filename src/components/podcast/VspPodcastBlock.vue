@@ -54,10 +54,10 @@
         }
       },
       apiUrl() {
-        return _.get(this.$vsp, 'API_URL', envApiUrl);
+        return _.get(this.$vsp.podcast, 'podcastsUrl', envApiUrl);
       },
       link() {
-        return this.$vsp.home + this.item.id + '-' + this.item.name
+        return this.$vsp.podcast.podcasts + '/' + this.item.id + '-' + this.item.name
       }
     }
   }

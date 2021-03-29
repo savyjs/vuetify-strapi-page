@@ -13,12 +13,10 @@
   </client-only>
 </template>
 <script>
-  const apiUrl = process.env.API_URL;
   export default {
     props: ['value', 'item'],
     data() {
       return {
-        apiUrl,
         audioFile: this.value
       }
     },

@@ -34,7 +34,8 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
         home: '/',
         logo: undefined,
         lottiePath: undefined,
-        podcasts: '/podcasts',
+        podcastsUrl: '/podcasts', // API
+        podcasts: '/podcasts', // Frontend
         menu: [
           {title: 'home', icon: 'fa-home', color: "success darken-2", link: '/'},
         ],
