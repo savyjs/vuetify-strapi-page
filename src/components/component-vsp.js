@@ -44,7 +44,10 @@ import VspPodcastList from './../components/podcast/VspPodcastList'
 import VspVueMusicPlayer from './../components/podcast/VspVueMusicPlayer'
 import VspPodcastShow from './../components/podcast/VspPodcastShow'
 
+import VspLandingTime from './../components/landing/VspLandingTime'
+
 export default {
+  VspLandingTime,
   VspPodcastShow,
   VspPodcastBlock,
   VspPodcastList,
