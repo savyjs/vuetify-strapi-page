@@ -44,10 +44,15 @@ import VspPodcastList from './../components/podcast/VspPodcastList'
 import VspVueMusicPlayer from './../components/podcast/VspVueMusicPlayer'
 import VspPodcastShow from './../components/podcast/VspPodcastShow'
 
-import VspLandingTime from './../components/landing/VspLandingTime'
+import VspLandingSpring from './../components/landing/VspLandingSpring'
+
+import VspReserveItemCard from './../components/reserve/VspReserveItemCard'
+import VspReserveItemList from './../components/reserve/VspReserveItemList'
 
 export default {
-  VspLandingTime,
+  VspReserveItemCard,
+  VspReserveItemList,
+  VspLandingSpring,
   VspPodcastShow,
   VspPodcastBlock,
   VspPodcastList,

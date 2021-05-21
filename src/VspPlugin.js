@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import Vue from 'vue'
 import moduleOptions from './VspOptions'
+import NuxtJsonld from 'nuxt-jsonld';
 // import JsonExcel from "vue-json-excel";
 import Helper from './assets/VspHelper'
 import VspStore from './store/Vsp'
@@ -28,6 +29,7 @@ const t = (val) => _.isString(val) ? val.replace(/_/g, ' ') : val
 const ComponentLibrary = {
   install(Vue, options = {}) {
     try {
+      Vue.use(NuxtJsonld);
       Vue.use(wysiwyg, {});
       Vue.use(VueStripeMenu, {});
       Vue.component('ValidationProvider', ValidationProvider);

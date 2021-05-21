@@ -4,6 +4,7 @@ import {sortRoutes} from '@nuxt/utils'
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
+
 const getFiles = path => {
   const files = []
   for (const file of fs.readdirSync(path)) {
@@ -110,14 +111,6 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
         }
       });
     }
-
-    // This will be called before Nuxt generates your pages
-    let contentOptions = _.get(this, 'nuxt.options.content', {});
-    // this.addModule({
-    //   src: "@nuxt/content"
-    // });
-
-    // this.nuxt.hook('generate:cache:ignore', ignore => ignore.push('content'))
 
     this.addTemplate({
       fileName: 'assets/vsp.png',
@@ -233,6 +226,11 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
     this.addLayout({
       name: "vsp",
       src: path.resolve(__dirname, 'layout/vsp.vue'),
+    })
+
+    this.addLayout({
+      name: "vspSpring",
+      src: path.resolve(__dirname, 'layout/vspSpring.vue'),
     })
 
     this.addLayout({
