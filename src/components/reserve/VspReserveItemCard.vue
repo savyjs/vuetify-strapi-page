@@ -1,5 +1,7 @@
 <template>
   <v-card
+    outlined
+    tile
     :to="item.to"
     width="100%"
     height="100%">
