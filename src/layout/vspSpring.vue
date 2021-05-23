@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card tile class="ma-0 pa-0">
+    <v-card tile class="ma-0 pa-0 grey lighten-4">
       <v-img
         fit
         height="170px"

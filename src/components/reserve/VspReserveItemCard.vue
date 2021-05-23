@@ -8,8 +8,18 @@
         <v-icon small>fa-bookmark</v-icon>
       </v-btn>
     </v-img>
-    <div class="text-start">
-      <v-icon v-if="item.stars" v-for="j in item.stars" color="warning" small class="mx-1" :key="j">star</v-icon>
+    <div class="d-flex justify-space-between">
+      <span><v-icon v-if="item.stars" v-for="j in item.stars" color="warning" small class="mx-1" :key="j">star</v-icon></span>
+      <span class="font-12">
+        <b class="px-3 mx-1 teal--text" v-if="!item.discount && item.price">{{ _.isNumber(item.price) ? $Helper.price(item.price,item.unit || '$') :
+              (item.price || '')}}</b>
+            <template v-else-if="item.discount && item.price">
+              <b class="px-3 mr-1  teal--text">
+                {{ _.isNumber(item.price) ? $Helper.price(item.price-item.discount,'$') : (item.price || '')}}
+              </b>
+              <i class="ml-1 px-3 red white--text"><small>{{$Helper.price(item.discount,'$')}} {{$t('off')}}</small></i>
+            </template>
+      </span>
     </div>
     <v-spacer/>
     <v-card-text>
@@ -21,20 +31,6 @@
         <tr v-if="item.subTitle">
           <td class="text-start">
             <h3>{{item.subTitle}}</h3>
-          </td>
-        </tr>
-        <tr class="text-center">
-          <td class="green--text text-green">
-            <b class="px-3 green lighten-4 mx-1" v-if="!item.discount">{{ _.isNumber(item.price) ? $Helper.price(item.price,item.unit || '$') :
-              (item.price || '')}}</b>
-            <template v-else-if="item.discount">
-              <strike class="ml-1 px-3 red lighten-4 red--text"><i><small>{{$Helper.price(item.price,'$')}}</small></i></strike>
-              <b class="px-3 green lighten-4 mr-1">{{ _.isNumber(item.price) ? $Helper.price(item.price-item.discount,'$') : (item.price || '')}}</b>
-            </template>
-          </td>
-          <td class="error--text">
-            <v-icon v-if="!item.discount">fa-gift</v-icon>
-            <v-icon v-else>fa-flash</v-icon>
           </td>
         </tr>
         <tr v-for="(row,key) in _.get(item,'rows',[])" :key="key">
