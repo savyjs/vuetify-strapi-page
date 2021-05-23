@@ -1,88 +1,97 @@
 <template>
-  <v-hover
-    v-slot:default="{ hover }"
-    open-delay="200"
-  >
-    <v-card
-      :to="item.to"
-      :class="`radius---15 white elevation---${hover ? 24 : 10}`"
-      width="100%"
-      height="100%">
-
-      <v-img eager :src="item.img" sizes="100%">
-        <v-btn color="warning" style="position: absolute;top:10px;left:10px" fab small>
-          <v-icon small>fa-bookmark</v-icon>
-        </v-btn>
-      </v-img>
-      <v-card-text>
-        <table class="oddTable">
-          <tbody>
-          <tr>
-            <td>
-              <v-icon class="mx-1 font-12" color="grey" small>fa-plane</v-icon>
-              <b>{{item.title}}</b>
-            </td>
-            <td class="text-left green--text  font-11">
-              <b>{{$Helper.price(item.price)}}</b>
-              <v-icon color="gardeshGreen" small class="mx-1">fa-gift</v-icon>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <v-chip
-                small
-                dark
-                color="green lighten-1"
-              >
-                <v-icon color="white" small class="mx-1 font-11">fa-hourglass-2</v-icon>
-                {{item.subTitle}}
-              </v-chip>
-            </td>
-            <td class="text-left  font-11 error--text">
-              <strike><i><small>{{$Helper.price(item.price-10000)}}</small></i></strike>
-              <v-icon color="error" small class="mx-1 font-12">fa-flash</v-icon>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </v-card-text>
-      <v-card-actions>
-        <v-icon small class="mx-1" color="error">fa-fire</v-icon>
-        <v-icon v-for="j in item.stars" color="warning" small class="mx-1" :key="j">star</v-icon>
-        <v-spacer/>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn class="ml-1" color="gardeshGreen" v-on="on" outlined fab small>
-              <v-icon small>fa-taxi</v-icon>
-            </v-btn>
-          </template>
-          <span>تاکسی فرودگاه</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn class="ml-1" color="info" v-on="on" outlined fab small>
-              <v-icon small>fa-hotel</v-icon>
-            </v-btn>
-          </template>
-          <span>هتل</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn class="ml-1" color="primary" v-on="on" outlined fab small>
-              <v-icon small>fa-train</v-icon>
-            </v-btn>
-          </template>
-          <span>قطار</span>
-        </v-tooltip>
-      </v-card-actions>
-    </v-card>
-  </v-hover>
+  <v-card
+    :to="item.to"
+    width="100%"
+    height="100%">
+    <v-img eager :src="item.img" sizes="100%">
+      <v-btn v-if="item.bookmark" color="warning" style="position: absolute;top:10px;left:10px" fab small>
+        <v-icon small>fa-bookmark</v-icon>
+      </v-btn>
+    </v-img>
+    <div class="text-start">
+      <v-icon v-if="item.stars" v-for="j in item.stars" color="warning" small class="mx-1" :key="j">star</v-icon>
+    </div>
+    <v-spacer/>
+    <v-card-text>
+      <div class="text-start">
+        <h2 class="text-start">{{item.title}}</h2>
+      </div>
+      <table class="oddTable">
+        <tbody>
+        <tr v-if="item.subTitle">
+          <td class="text-start">
+            <h3>{{item.subTitle}}</h3>
+          </td>
+        </tr>
+        <tr class="text-center">
+          <td class="green--text text-green">
+            <b class="px-3 green lighten-4 mx-1" v-if="!item.discount">{{ _.isNumber(item.price) ? $Helper.price(item.price,item.unit || '$') :
+              (item.price || '')}}</b>
+            <template v-else-if="item.discount">
+              <strike class="ml-1 px-3 red lighten-4 red--text"><i><small>{{$Helper.price(item.price,'$')}}</small></i></strike>
+              <b class="px-3 green lighten-4 mr-1">{{ _.isNumber(item.price) ? $Helper.price(item.price-item.discount,'$') : (item.price || '')}}</b>
+            </template>
+          </td>
+          <td class="error--text">
+            <v-icon v-if="!item.discount">fa-gift</v-icon>
+            <v-icon v-else>fa-flash</v-icon>
+          </td>
+        </tr>
+        <tr v-for="(row,key) in _.get(item,'rows',[])" :key="key">
+          <td v-if="row.title">
+            {{row.title || ''}}
+          </td>
+          <td v-if="row.value">
+            {{row.value || ''}}
+          </td>
+          <td v-if="row.icon">
+            <v-icon>{{row.icon}}</v-icon>
+          </td>
+          <td v-if="row.image">
+            <img :src="row.image"/>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </v-card-text>
+    <v-card-actions>
+      <v-tooltip bottom v-for="(badge,key) in _.get(item,'badges',[])" :key="key">
+        <template v-slot:activator="{ on }">
+          <v-btn class="ml-1" :color="badge.color || 'primary'" v-on="on" outlined fab small>
+            <v-icon small>{{badge.icon}}</v-icon>
+          </v-btn>
+        </template>
+        <span>{{badge.title}}</span>
+      </v-tooltip>
+      <div>
+        <v-chip
+          v-for="(tag,key) in _.get(item,'tags',[])"
+          :key="key"
+          small
+          dark
+          class="ml-1"
+          color="green lighten-1"
+        >
+          <v-icon color="white" small class="mx-1 font-11">{{tag.icon}}</v-icon>
+          <span class="mx-1">{{tag.title}}</span>
+        </v-chip>
+      </div>
+    </v-card-actions>
+    <v-card-actions>
+      <div>
+        <v-img :src="image" v-for="(image,i) in _.get(item,'tagImages',[])" :key="i"/>
+      </div>
+    </v-card-actions>
+  </v-card>
 </template>
 <script>
+  import _ from 'lodash'
+
   export default {
     props: ['item'],
+    created() {
+      this._ = _;
+    },
     data() {
       return {
         margin: 0,
