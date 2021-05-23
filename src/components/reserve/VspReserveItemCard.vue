@@ -25,8 +25,8 @@
     </div>
     <v-spacer/>
     <v-card-text>
-      <div class="text-start">
-        <h2 class="text-start">{{item.title}}</h2>
+      <div class="d-flex justify-space-around mb-2 text-start">
+        <h2>{{item.title}}</h2>
       </div>
       <table class="oddTable">
         <tbody>
@@ -67,7 +67,7 @@
           :key="key"
           small
           dark
-          class="ml-1"
+          class="ml-1 my-1"
           color="green lighten-1"
         >
           <v-icon color="white" small class="mx-1 font-11">{{tag.icon}}</v-icon>
