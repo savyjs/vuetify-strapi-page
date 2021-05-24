@@ -45,11 +45,13 @@ import VspVueMusicPlayer from './../components/podcast/VspVueMusicPlayer'
 import VspPodcastShow from './../components/podcast/VspPodcastShow'
 
 import VspLandingSpring from './../components/landing/VspLandingSpring'
+import VspAboutMeSpring from './../components/landing/VspAboutMeSpring'
 
 import VspReserveItemCard from './../components/reserve/VspReserveItemCard'
 import VspReserveItemList from './../components/reserve/VspReserveItemList'
 
 export default {
+  VspAboutMeSpring,
   VspReserveItemCard,
   VspReserveItemList,
   VspLandingSpring,

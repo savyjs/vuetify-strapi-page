@@ -10,6 +10,11 @@
         <v-icon small>fa-bookmark</v-icon>
       </v-btn>
     </v-img>
+    <v-card-actions>
+      <div class="d-flex ">
+        <span class="mr-1" v-for="(image,i) in _.get(item,'tagImages',[])" :key="i"><v-img :src="image" /></span>
+      </div>
+    </v-card-actions>
     <div class="d-flex justify-space-between">
       <span><v-icon v-if="item.stars" v-for="j in item.stars" color="warning" small class="mx-1" :key="j">star</v-icon></span>
       <span class="font-12">
@@ -75,11 +80,7 @@
         </v-chip>
       </div>
     </v-card-actions>
-    <v-card-actions>
-      <div>
-        <v-img :src="image" v-for="(image,i) in _.get(item,'tagImages',[])" :key="i"/>
-      </div>
-    </v-card-actions>
+
   </v-card>
 </template>
 <script>
