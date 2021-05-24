@@ -46,11 +46,13 @@ import VspPodcastShow from './../components/podcast/VspPodcastShow'
 
 import VspLandingSpring from './../components/landing/VspLandingSpring'
 import VspAboutMeSpring from './../components/landing/VspAboutMeSpring'
+import VspContactSectionSpring from './../components/landing/VspContactSectionSpring'
 
 import VspReserveItemCard from './../components/reserve/VspReserveItemCard'
 import VspReserveItemList from './../components/reserve/VspReserveItemList'
 
 export default {
+  VspContactSectionSpring,
   VspAboutMeSpring,
   VspReserveItemCard,
   VspReserveItemList,

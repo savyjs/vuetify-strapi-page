@@ -101,6 +101,16 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
         }
       });
     }
+    
+    if (_.get(options, 'recaptcha', true)) {
+      let recaptchaOptions = _.get(this, 'nuxt.options.recaptcha', {});
+      this.addModule({
+        src: "@nuxtjs/recaptcha",
+        options: {
+          ...recaptchaOptions
+        }
+      });
+    }
 
     if (_.get(options, 'strapi', true)) {
       let strapiOptions = _.get(this, 'nuxt.options.strapi', {});

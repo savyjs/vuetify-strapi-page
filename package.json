@@ -1,7 +1,7 @@
 {
   "name": "vuetify-strapi-page",
   "description": "vuetify dashboard page matched to strapi last version",
-  "version": "0.1.61",
+  "version": "0.1.62",
   "author": "Ehsan Afshari @savyjs <savvyversa@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -54,6 +54,7 @@
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.0",
+    "@nuxtjs/recaptcha": "^1.0.4",
     "@nuxtjs/storybook": "^3.3.1",
     "@nuxtjs/strapi": "^0.3.0",
     "axios": "^0.21.1",
