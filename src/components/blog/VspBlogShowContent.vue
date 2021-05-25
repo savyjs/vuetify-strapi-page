@@ -90,37 +90,13 @@
 </i18n>
 <script>
   export default {
-    props: ['params'],
+    props: ['article', 'tags', 'next', 'prev', 'params'],
     data() {
       return {
         article: undefined,
         tags: undefined,
         prev: undefined,
         next: undefined,
-      }
-    },
-    async asyncData({params, $content}) {
-      const article = await $content('articles', this.params.slug).fetch().catch(err => {
-      })
-      const tagsList = await $content('tags')
-        .only(['name', 'slug'])
-        .where({name: {$containsAny: article.tags}})
-        .fetch()
-        .catch(err => {
-        })
-      const tags = Object.assign({}, ...tagsList.map((s) => ({[s.name]: s})))
-      const [prev, next] = await $content('articles')
-        .only(['title', 'slug'])
-        .sortBy('createdAt', 'asc')
-        .surround(params.slug)
-        .fetch()
-        .catch(err => {
-        })
-      return {
-        article,
-        tags,
-        prev,
-        next
       }
     },
     methods: {

@@ -8,10 +8,11 @@
             cols="12"
             class="d-flex justify-start align start"
             lg="8">
-            <NuxtLink class="text-left d-flex justify-start align-center" :to="blogHome">
-              <v-img position="center left" :src="blogLogo" height="70px" contain/>
-              <h1 style="text-underline: none">{{$t(blogTitle)}}</h1>
-            </NuxtLink>
+            <div class="text-start d-flex justify-start align-center" :to="blogHome">
+              <v-img v-if="blogLogo" position="center left" :src="blogLogo" max-width="100px" max-height="70px"
+                     contain/>
+              <h1 v-if="blogTitle" style="text-underline: none">{{$t(blogTitle)}}</h1>
+            </div>
           </v-col>
           <v-col
             cols="12"
@@ -35,19 +36,19 @@
           </v-col>
         </v-row>
         <v-divider/>
-        <v-row>
-          <span
+        <v-chip-group>
+          <v-chip
+            outlined
+            small
             v-for="(tag,i) of tags"
             :key="tag.slug"
-            class="px-2 my-2 text-left"
+            class="px-2 my-2"
+            color="success"
+            :to="`${tagsLink}/${tag.slug}`"
           >
-            <NuxtLink text :to="`${tagsLink}/${tag.slug}`" class="grey--text px-1">
-              <small>
-                {{ tag.name }}
-              </small>
-            </NuxtLink>
-          </span>
-        </v-row>
+            {{ tag.name }}
+          </v-chip>
+        </v-chip-group>
       </v-col>
     </v-row>
   </header>
@@ -74,10 +75,10 @@
     },
     computed: {
       blogSubtitle() {
-        return this.vsp.blog.subtitle || 'sub title here';
+        return this.vsp.blog.subtitle || '';
       },
       blogTitle() {
-        return this.vsp.blog.title || 'Blog';
+        return this.vsp.blog.title || '';
       },
       blogLogo() {
         return this.vsp.blog.logo || '/logo.png';
