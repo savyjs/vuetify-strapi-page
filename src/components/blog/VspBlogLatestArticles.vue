@@ -2,7 +2,7 @@
   <v-row>
     <v-col
       cols="12"
-      md="6"
+      xl="6"
       v-for="article of articles"
       :key="article.slug"
     >
@@ -12,9 +12,10 @@
         :to="`${contentsLink}/${article.slug}`"
       >
         <v-row>
-          <v-col cols="12" md="9">
+          <v-col cols="12" :md="article.img ? 9 : 12">
             <v-card-title>
-              <h2 class="font-bold">{{ article.title }}</h2>
+              <h2 class="font-bold font-13">{{ article.title }}</h2>
+              <v-subheader v-if="article.updatedAt">{{formatDate(article.updatedAt)}}</v-subheader>
               <v-spacer/>
               <small>{{ article.author.name }}</small>
             </v-card-title>
@@ -22,12 +23,24 @@
               {{ article.description }}
             </v-card-text>
           </v-col>
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="3" v-if="article.img">
             <v-img
               contain
-              v-if="article.img"
               :src="article.img"
             />
+          </v-col>
+          <v-col cols="12">
+            <v-chip v-if="article.tags" v-for="(tag, id) in article.tags" :key="id">
+              <v-btn
+                outlined
+                class="mr-1"
+                rounded
+                :to="`/blog/tag/${tags[tag].slug}`"
+                x-small
+              >
+                {{ tags[tag].name }}
+              </v-btn>
+            </v-chip>
           </v-col>
         </v-row>
       </v-card>
@@ -35,6 +48,16 @@
   </v-row>
 </template>
 
+<i18n>
+  {
+  "en":{
+  "article_not_found" : "post not found (404)."
+  },
+  "fa":{
+  "article_not_found": "مقاله پیدا نشد (۴۰۴)"
+  }
+  }
+</i18n>
 <script>
   export default {
     props: ['articles', 'tags'],
@@ -49,6 +72,12 @@
         return this.vsp.blog.tags || '/tags';
       },
     },
+    methods: {
+      formatDate(date) {
+        const options = {year: 'numeric', month: 'long', day: 'numeric'}
+        return new Date(date).toLocaleDateString('en', options)
+      }
+    }
 
   }
 </script>
