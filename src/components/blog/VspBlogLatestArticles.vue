@@ -1,12 +1,8 @@
 <template>
-  <v-row
-    no-gutters
-    style="flex-wrap: nowrap;"
-  >
+  <v-row>
     <v-col
       cols="12"
       md="6"
-      class="flex-grow-0 flex-shrink-0"
       v-for="article of articles"
       :key="article.slug"
     >
