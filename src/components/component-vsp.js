@@ -38,6 +38,7 @@ import VspBlogShowAuthorPage from './../components/blog/VspBlogShowAuthorPage'
 import VspBlogPrevNext from './../components/blog/VspBlogPrevNext'
 import VspBlogAuthor from './../components/blog/VspBlogAuthor'
 import VspBlogShowList from './../components/blog/VspBlogShowList'
+import VspBlogLatestArticles from './../components/blog/VspBlogLatestArticles'
 
 import VspPodcastBlock from './../components/podcast/VspPodcastBlock'
 import VspPodcastList from './../components/podcast/VspPodcastList'
@@ -72,6 +73,7 @@ export default {
   VspAccount,
   VspAccessAlert,
   VspBlogShowList,
+  VspBlogLatestArticles,
   VspBlogShowTagPage,
   VspBlogShowContent,
   VspBlogShowAuthorPage,

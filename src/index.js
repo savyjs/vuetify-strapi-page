@@ -101,14 +101,11 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
         }
       });
     }
-    
+
     if (_.get(options, 'recaptcha', true)) {
       let recaptchaOptions = _.get(this, 'nuxt.options.recaptcha', {});
       this.addModule({
-        src: "@nuxtjs/recaptcha",
-        options: {
-          ...recaptchaOptions
-        }
+        src: "@nuxtjs/recaptcha"
       });
     }
 

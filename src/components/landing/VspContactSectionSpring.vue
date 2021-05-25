@@ -1,5 +1,5 @@
 <template>
-  <v-card tile flat>
+  <v-card tile flat class="envelopPocket">
     <v-row>
       <v-col>
         <table class="oddTable">
@@ -40,8 +40,8 @@
             </div>
           </v-col>
           <v-col cols="12" sm="10" md="8" lg="7" justify="center">
-            <v-text-field dense outlined label="Email" v-model="main.email"/>
-            <v-textarea dense outlined label="Message" v-model="main.message"/>
+            <v-text-field filled dense outlined label="Email" v-model="main.email"/>
+            <v-textarea filled dense outlined label="Message" v-model="main.message"/>
           </v-col>
         </v-row>
         <v-row justify="center">
@@ -58,16 +58,31 @@
 </template>
 <script>
   export default {
-    props: ['api', 'name', 'rows', 'tags', 'contacts', 'img', 'social', 'footer', 'address', 'phone', 'email'],
+    props: ['api', 'title', 'rows', 'tags', 'contacts', 'img', 'social', 'footer', 'address', 'phone', 'email'],
     data() {
       return {
         main: {}
       }
     },
     methods: {
-      submitForm() {
+      async submitForm() {
+        try {
+          const token = await this.$recaptcha.getResponse()
+          console.log('ReCaptcha token:', token)
 
+          // send token to server alongside your form data
+
+          // at the end you need to reset recaptcha
+          await this.$recaptcha.reset()
+        } catch (error) {
+          console.log('Login error:', error)
+        }
       }
     }
   }
 </script>
+<style scoped>
+  .envelopPocket {
+    background: url('/bg/bottombg.png') no-repeat bottom right 30px 100%;
+  }
+</style>

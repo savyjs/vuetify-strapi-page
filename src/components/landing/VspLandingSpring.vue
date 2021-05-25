@@ -1,5 +1,5 @@
 <template>
-  <v-card tile class="ma-0 pa-0 grey lighten-4" :dark="dark">
+  <v-card tile class="ma-0 pa-0 grey lighten-4" color="transparent" :dark="dark">
     <v-img
       fit
       height="170px"
