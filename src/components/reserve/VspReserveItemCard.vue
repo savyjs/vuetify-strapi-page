@@ -97,6 +97,43 @@
       }
     },
   }
+  /*
+  item example:
+  {
+      title: 'Vuetify Strapi Dashboard',
+      subTitle: 'build your customized panel/dashboard/crm with this open-source Nuxt module very fast',
+      img: '/vsd.png',
+      bookmark: false,
+      tagImages: [
+        "https://img.shields.io/npm/v/vuetify-strapi-dashboard?logo=npm",
+        "https://img.shields.io/npm/dt/vuetify-strapi-dashboard?color=green&label=install&logo=npm&style=flat"
+      ],
+      rows: [
+        {icon: "check", title: 'dashboard and CRM'},
+        {icon: "check", title: 'simple and 2FA login pages'},
+        {icon: "check", title: 'advanced CRUD system'},
+        {icon: "check", title: 'filter, sort, search and excel report'},
+        {icon: "check", title: 'form generator'},
+        {icon: "check", title: 'side menu'},
+        {icon: "check", title: 'site settings'},
+        {icon: "check", title: 'notification system'},
+        {icon: "check", title: 'custom API integration'},
+        {icon: "check", title: 'pop-ups, modal and snackbar system'},
+        {icon: "check", title: 'user, auth and role system'},
+        {icon: "check", title: 'RTL support'},
+      ],
+      tags: [
+        {icon: "star", title: 'Nuxt'},
+        {icon: "star", title: 'Strapi'},
+        {icon: "flag", title: 'i18n'},
+        {icon: "flag", title: 'content'},
+        {icon: "check", title: 'documentation'},
+      ],
+      price: 'free (open-source)',
+      to: '/vsd'
+    },
+
+   */
 </script>
 <style>
 

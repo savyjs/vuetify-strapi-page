@@ -51,8 +51,10 @@ import VspContactSectionSpring from './../components/landing/VspContactSectionSp
 
 import VspReserveItemCard from './../components/reserve/VspReserveItemCard'
 import VspReserveItemList from './../components/reserve/VspReserveItemList'
+import VspReserveItemPage from './../components/reserve/VspReserveItemPage'
 
 export default {
+  VspReserveItemPage,
   VspContactSectionSpring,
   VspAboutMeSpring,
   VspReserveItemCard,

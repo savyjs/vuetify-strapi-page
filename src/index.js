@@ -241,6 +241,16 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
     })
 
     this.addLayout({
+      name: "vspReservation",
+      src: path.resolve(__dirname, 'layout/vspReservation.vue'),
+    })
+
+    this.addLayout({
+      name: "vspReservationItem",
+      src: path.resolve(__dirname, 'layout/vspReservationItem.vue'),
+    })
+
+    this.addLayout({
       name: "vspPodcastBlog",
       src: path.resolve(__dirname, 'layout/vspPodcastBlog.vue'),
     })
