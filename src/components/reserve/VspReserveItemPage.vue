@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link v-if="_.has(item,'canonical')" rel="canonical" :href="item.canonical"/>
     <v-container class="reserveBg" fluid>
       <v-container>
         <v-row justify="center" align="center">
@@ -29,9 +30,10 @@
               Installs: {{item.downloads}}
             </span>
             <br/>
-            <p class="text-white font-13">
+            <p class="text-white font-13" v-if="_.has(item,'stars')">
               <v-icon color="white"
-                      v-if="_.has(item,'stars')" v-for="j in item.stars" small
+                      v-for="j in item.stars"
+                      small
                       class="mx-1"
                       :key="j">star
               </v-icon>
@@ -41,7 +43,9 @@
               License: (EAUL)
             </p>
             <v-divider dark class="my-3"/>
-            <v-btn color="white" outlined rounded target="_blank" v-if="buyLink" :href="buyLink">Get - {{item.price}}
+            <v-btn color="white" class="grey-text" rounded target="_blank" v-if="buyLink" :href="buyLink">Get
+              <v-divider vertical class="mx-1"/>
+              {{item.price}}
             </v-btn>
           </v-col>
         </v-row>
@@ -65,7 +69,7 @@
                   Copy Link
                 </v-btn>
                 <div class="font-12">
-                  <template v-if="item.discount && item.price">
+                  <template v-if="_.get(item,'discount',0) && _.get(item,'price',0)">
                     <b class="px-3 mr-1 teal--text">
                       {{ _.isNumber(item.price) ? $Helper.price(item.price-item.discount,'$') : (item.price || '')}}
                     </b>
@@ -112,7 +116,7 @@
                   color="green lighten-1"
                 >
                   <v-icon color="white" small class="mx-1 font-11">{{tag.icon}}</v-icon>
-                  <span class="mx-1"  v-if="_.has(tag,'title')">{{tag.title}}</span>
+                  <span class="mx-1" v-if="_.has(tag,'title')">{{tag.title}}</span>
                 </v-chip>
               </div>
               <div class="mr-1 d-flex">
@@ -121,8 +125,9 @@
               </div>
             </v-col>
             <v-col cols="12" order-md="1" md="8">
-              <article v-html="_.get(item,'description','')"></article>
-              <nuxt-content :document="article"></nuxt-content>
+              <article v-if="_.get(item,'description',null)" v-html="_.get(item,'description',null)"></article>
+              <v-divider class="my-5" v-if="article && _.get(item,'description',null)"/>
+              <nuxt-content v-if="article" :document="article"/>
             </v-col>
           </v-row>
         </v-card-text>
