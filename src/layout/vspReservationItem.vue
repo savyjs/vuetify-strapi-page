@@ -14,7 +14,8 @@
               </div>
             </v-col>
             <v-col class="d-flex justify-end align-center">
-              <v-btn text small class="mx-1" dark rounded v-for="(item,j) in menuItems" :key="j">
+              <v-btn text small class="mx-1" :to="_.get(item,'link',undefined)" dark rounded
+                     v-for="(item,j) in menuItems" :key="j">
                 <v-icon v-if="item.icon" class="mx-1">{{item.icon}}</v-icon>
                 {{item.text || ''}}
               </v-btn>
