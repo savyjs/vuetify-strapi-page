@@ -4,12 +4,20 @@
       <v-container class="reserveBg" fluid>
         <v-container>
           <v-row>
-            <v-col class="d-flex justify-start align-start">
-              <v-img v-if="logo" :src="logo" max-width="100px" contain max-height="100px"/>
+            <v-col class="d-flex justify-start align-center">
+              <nuxt-link v-if="logo" exact-active-class="" active-class="" :to="_.get(vsp,'reservation.home','/')">
+                <v-img :src="logo" max-width="100px" contain max-height="70px"/>
+              </nuxt-link>
               <div class="mx-1" v-else-if="title || subtitle">
                 <h1 v-if="title">{{title}}</h1>
                 <h3 v-if="subtitle">{{subtitle}}</h3>
               </div>
+            </v-col>
+            <v-col class="d-flex justify-end align-center">
+              <v-btn text small class="mx-1" dark rounded v-for="(item,j) in menuItems" :key="j">
+                <v-icon v-if="item.icon" class="mx-1">{{item.icon}}</v-icon>
+                {{item.text || ''}}
+              </v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -66,6 +74,9 @@
       this._ = _;
     },
     computed: {
+      menuItems() {
+        return _.get(this.vsp, 'reservation.menu', []);
+      },
       title() {
         return _.get(this.vsp, 'title', process.env.title || defaultConfig.title);
       },
