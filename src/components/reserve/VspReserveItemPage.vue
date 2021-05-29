@@ -161,20 +161,5 @@
     created() {
       this._ = _;
     },
-    jsonld() {
-      return {
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.5",
-          "reviewCount": _.get(item,'downloads' , 11)
-        },
-        name: this.item.title,
-        image: this.vsp.API_URL + _.get(this.item, 'image.url', ''),
-        "description": _.get(this.item, 'subtitle', '') + ' - ' + _.get(this.item, 'description', this.article || ''),
-        // review: {}
-      };
-    },
   }
 </script>

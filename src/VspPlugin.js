@@ -29,6 +29,7 @@ const t = (val) => _.isString(val) ? val.replace(/_/g, ' ') : val
 const ComponentLibrary = {
   install(Vue, options = {}) {
     try {
+      // you can set the indentation
       Vue.use(NuxtJsonld);
       Vue.use(wysiwyg, {});
       Vue.use(VueStripeMenu, {});
