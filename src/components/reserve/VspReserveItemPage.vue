@@ -168,7 +168,7 @@
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.5",
-          "reviewCount": item.downloads || 11
+          "reviewCount": _.get(item,'downloads' , 11)
         },
         name: this.item.title,
         image: this.vsp.API_URL + _.get(this.item, 'image.url', ''),
