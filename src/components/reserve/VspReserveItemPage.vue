@@ -64,7 +64,7 @@
           <v-row>
             <v-col cols="12" order-md="2" md="4">
               <div>
-                <v-btn color="info" rounded x-small>
+                <v-btn color="info" @click="vsp.Helper.copyToClipboard" rounded x-small>
                   <v-icon class="mx-1" x-small>content_copy</v-icon>
                   Copy Link
                 </v-btn>
@@ -160,6 +160,21 @@
     },
     created() {
       this._ = _;
-    }
+    },
+    jsonld() {
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.5",
+          "reviewCount": item.downloads || 11
+        },
+        name: this.item.title,
+        image: this.vsp.API_URL + _.get(this.item, 'image.url', ''),
+        "description": _.get(this.item, 'subtitle', '') + ' - ' + _.get(this.item, 'description', this.article || ''),
+        // review: {}
+      };
+    },
   }
 </script>
