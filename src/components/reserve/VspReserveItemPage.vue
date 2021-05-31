@@ -63,12 +63,12 @@
         <v-card-text>
           <v-row>
             <v-col cols="12" order-md="2" md="4">
-              <div>
+              <div class="d-flex justify-space-around">
                 <v-btn color="info" @click="vsp.Helper.copyToClipboard" rounded x-small>
                   <v-icon class="mx-1" x-small>content_copy</v-icon>
                   Copy Link
                 </v-btn>
-                <div class="font-12">
+                <span class="font-12">
                   <template v-if="_.get(item,'discount',0) && _.get(item,'price',0)">
                     <b class="px-3 mr-1 teal--text">
                       {{ _.isNumber(item.price) ? $Helper.price(item.price-item.discount,'$') : (item.price || '')}}
@@ -76,7 +76,7 @@
                     <i class="ml-1 px-3 red white--text"><small>{{$Helper.price(item.discount,'$')}}
                       {{$t('off')}}</small></i>
                   </template>
-                </div>
+                </span>
               </div>
               <div>
                 <table class="oddTable">

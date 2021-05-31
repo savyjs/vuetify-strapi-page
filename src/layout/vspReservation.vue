@@ -1,31 +1,34 @@
 <template>
   <v-app>
     <v-card tile class="ma-0 pa-0 grey lighten-4">
-      <v-img
-        fit
-        height="170px"
-        width="100%"
-        :src="background"
-      >
+      <v-container class="reserveBg" fluid>
         <v-container>
           <v-row>
-            <v-col class="d-flex justify-start align-start">
-              <v-img v-if="logo" :src="logo" max-width="100px" contain max-height="100px"/>
-              <div class="mx-1" v-else-if="title || subtitle">
-                <h1 v-if="title">{{title}}</h1>
-                <h3 v-if="subtitle">{{subtitle}}</h3>
-              </div>
+            <v-col class="d-flex justify-start align-center">
+              <nuxt-link  v-if="logo" style="text-decoration: none" exact-active-class="" active-class="" :to="_.get(vsp,'reservation.home','/')">
+                <v-img :src="logo" max-width="100px" contain max-height="70px"/>
+                <div class="mx-1 my-2" v-if="title || subtitle">
+                  <h1 v-if="title" class="green--text text--darken-4  font-13">{{title}}</h1>
+                  <h3 v-if="subtitle">{{subtitle}}</h3>
+                </div>
+              </nuxt-link>
             </v-col>
             <v-col class="d-flex justify-end align-center">
-              <v-btn text small class="mx-1" :to="_.get(item,'link',undefined)" dark rounded
-                     v-for="(item,j) in menuItems" :key="j">
+              <v-btn text
+                     small
+                     class="mx-1"
+                     :to="_.get(item,'link',undefined)"
+                     dark
+                     rounded
+                     v-for="(item,j) in menuItems"
+                     :key="j">
                 <v-icon v-if="item.icon" class="mx-1">{{item.icon}}</v-icon>
                 {{item.text || ''}}
               </v-btn>
             </v-col>
           </v-row>
         </v-container>
-      </v-img>
+      </v-container>
       <v-main>
         <nuxt/>
       </v-main>
@@ -54,7 +57,6 @@
   const defaultConfig = {
     title: 'Title Here',
     logo: '/logo-dark.png',
-    subtitle: 'Subtitle Here',
     background: '/bg/1.jpg',
     footer: {
       text: 'footer text',
@@ -78,20 +80,23 @@
       this._ = _;
     },
     computed: {
+      menuItems() {
+        return _.get(this.vsp, 'reservation.menu', []);
+      },
       title() {
-        return _.get(this.vsp, 'title', process.env.title || defaultConfig.title);
+        return _.get(this.vsp, 'reservation.title', process.env.title || defaultConfig.title);
       },
       subtitle() {
-        return _.get(this.vsp, 'subtitle', process.env.subtitle || defaultConfig.subtitle);
+        return _.get(this.vsp, 'reservation.subtitle', process.env.subtitle || defaultConfig.subtitle);
       },
       logo() {
-        return _.get(this.vsp, 'logo', process.env.logo || defaultConfig.logo);
+        return _.get(this.vsp, 'reservation.logo', process.env.logo || defaultConfig.logo);
       },
       background() {
-        return _.get(this.vsp, 'background', process.env.background || defaultConfig.background);
+        return _.get(this.vsp, 'reservation.background', process.env.background || defaultConfig.background);
       },
       footer() {
-        return _.get(this.vsp, 'footer', process.env.card || defaultConfig.footer);
+        return _.get(this.vsp, 'reservation.footer', process.env.card || defaultConfig.footer);
       }
     }
   }

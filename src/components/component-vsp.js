@@ -32,13 +32,13 @@ import VspShopSearch from './../components/shop/VspShopSearch'
 
 import VspBlogSearchInput from './../components/blog/VspBlogSearchInput'
 import VspBlogHeader from './../components/blog/VspBlogHeader'
-import VspBlogShowTagPage from './../components/blog/VspBlogShowTagPage'
 import VspBlogShowContent from './../components/blog/VspBlogShowContent'
 import VspBlogShowAuthorPage from './../components/blog/VspBlogShowAuthorPage'
 import VspBlogPrevNext from './../components/blog/VspBlogPrevNext'
 import VspBlogAuthor from './../components/blog/VspBlogAuthor'
 import VspBlogShowList from './../components/blog/VspBlogShowList'
 import VspBlogLatestArticles from './../components/blog/VspBlogLatestArticles'
+import VspBlogShowTagList from './../components/blog/VspBlogShowTagList'
 
 import VspPodcastBlock from './../components/podcast/VspPodcastBlock'
 import VspPodcastList from './../components/podcast/VspPodcastList'
@@ -54,6 +54,7 @@ import VspReserveItemList from './../components/reserve/VspReserveItemList'
 import VspReserveItemPage from './../components/reserve/VspReserveItemPage'
 
 export default {
+  VspBlogShowTagList,
   VspReserveItemPage,
   VspContactSectionSpring,
   VspAboutMeSpring,
@@ -76,7 +77,6 @@ export default {
   VspAccessAlert,
   VspBlogShowList,
   VspBlogLatestArticles,
-  VspBlogShowTagPage,
   VspBlogShowContent,
   VspBlogShowAuthorPage,
   VspBlogPrevNext,
