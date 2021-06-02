@@ -137,6 +137,7 @@
     </v-container>
   </div>
 </template>
+
 <script>
   import _ from 'lodash'
 
@@ -145,6 +146,25 @@
     data() {
       return {
         tab: 0
+      }
+    },
+    jsonld() {
+      try {
+        let jsnoLD = {
+          "@context": 'https://schema.org',
+          "@type": 'Product',
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": _.get(this.item, 'downloads', 11)
+          },
+          "name": _.get(this.item, 'title', ''),
+          "image": this.vsp.API_URL + _.get(this.item, 'image.url', ''),
+          "description": _.get(this.item, 'subtitle', '') + ' - ' + _.get(this.item, 'description', this.article || '')
+        };
+        return jsnoLD;
+      } catch (e) {
+        console.error('jsonLD', {e})
       }
     },
     computed: {
@@ -158,6 +178,7 @@
         return _.get(this.item, 'documentation', false)
       },
     },
+
     created() {
       this._ = _;
     },

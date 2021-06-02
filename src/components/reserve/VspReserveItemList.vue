@@ -19,12 +19,17 @@
   </v-card>
 </template>
 <script>
+  import _ from 'lodash';
+
   export default {
     props: ['items', 'cols', 'sm', 'md', 'xl', 'separate'],
     data() {
       return {
         margin: 0,
       }
+    },
+    created() {
+      this._ = _;
     }
   }
 </script>

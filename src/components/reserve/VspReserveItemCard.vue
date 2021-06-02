@@ -12,7 +12,7 @@
     </v-img>
     <v-card-actions>
       <div class="d-flex ">
-        <span class="mr-1" v-for="(image,i) in _.get(item,'tagImages',[])" :key="i"><v-img :src="image" /></span>
+        <span class="mr-1" v-for="(image,i) in _.get(item,'tagImages',[])" :key="i"><v-img :src="image"/></span>
       </div>
     </v-card-actions>
     <div class="d-flex justify-space-between">
@@ -96,6 +96,27 @@
         margin: 0,
       }
     },
+    jsonld() {
+      try {
+        let jsnoLD = [];
+        jsnoLD.push({
+          "@context": 'https://schema.org',
+          "@type": 'Product',
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": _.get(this.item, 'downloads', 11)
+          },
+          "name": _.get(this.item, 'title', ''),
+          "image": this.vsp.API_URL + _.get(this.item, 'image.url', ''),
+          "description": _.get(this.item, 'subtitle', '') + ' - ' + _.get(this.item, 'description', '')
+        });
+        console.log('item:', {jsnoLD})
+        return jsnoLD;
+      } catch (e) {
+        console.error('jsonLD', {e})
+      }
+    }
   }
   /*
   item example:
