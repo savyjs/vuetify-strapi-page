@@ -8,7 +8,7 @@
       append-icon="search"
       outlined
       dense
-      placeholder="Search Articles"
+      :placeholder="$t('SearchArticles')"
     />
     <ul
       v-if="articles.length"
@@ -25,6 +25,16 @@
     </ul>
   </div>
 </template>
+<i18n>
+  {
+  "fa":{
+  "SearchArticles":"جست و جوی مقالات"
+  },
+  "en":{
+  "SearchArticles":"Search Articles"
+  }
+  }
+</i18n>
 <script>
   export default {
     data() {
