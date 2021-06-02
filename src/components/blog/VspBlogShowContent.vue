@@ -12,10 +12,6 @@
                 />
                 <div class="overlay"></div>
                 <div class="text-white">
-                    <div class="mt-16 -mb-3 flex uppercase text-sm">
-                        <span class="mr-3">•</span>
-                        <p>{{ article.author.name }}</p>
-                    </div>
                     <span v-if="tags" v-for="(tag, id) in article.tags" :key="id">
             <v-btn
                     outlined
@@ -64,6 +60,7 @@
                     </ul>
                 </nav>
                 <!-- content from markdown -->
+
                 <nuxt-content :document="article"/>
                 <v-divider/>
                 <!-- prevNext component -->
@@ -92,11 +89,22 @@
     export default {
         props: ['article', 'tags', 'next', 'prev', 'params'],
         data() {
-            return {
-                article: undefined,
-                tags: undefined,
-                prev: undefined,
-                next: undefined,
+            return {}
+        },
+        jsonld() {
+            try {
+                let jsnoLD = {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "datePublished": this.article.updatedAt || "",
+                    "description": this.article.description || "",
+                    "articleBody": this.article.body || "",
+                    "author": this.article.author.name || "",
+                    "name": this.article.title || ''
+                }
+                return jsnoLD;
+            } catch (e) {
+                console.error('jsonLD error', {e})
             }
         },
         computed: {

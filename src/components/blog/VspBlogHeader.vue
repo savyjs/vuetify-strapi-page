@@ -1,18 +1,26 @@
 <template>
   <header class="flex">
     <v-row justify="center">
-      <v-col
-        cols="12">
+      <v-col cols="12">
         <v-row justify="space-between">
           <v-col
             cols="12"
             class="d-flex justify-start align start"
             lg="8">
-            <div class="text-start d-flex justify-start align-center" :to="blogHome">
-              <v-img v-if="blogLogo" position="center left" :src="blogLogo" max-width="100px" max-height="70px"
-                     contain/>
+            <nuxt-link
+              active-class=""
+              exact-active-class=""
+              class="text-start d-flex justify-start align-center" :to="blogHome">
+              <v-img
+                v-if="blogLogo"
+                position="center left"
+                :src="blogLogo"
+                max-width="100px"
+                max-height="70px"
+                contain
+              />
               <h1 v-if="blogTitle" style="text-underline: none">{{$t(blogTitle)}}</h1>
-            </div>
+            </nuxt-link>
           </v-col>
           <v-col
             cols="12"

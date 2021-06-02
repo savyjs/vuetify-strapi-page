@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container>
-      <vsp-blog-header/>
+      <vsp-blog-header />
     </v-container>
     <v-container>
       <Nuxt/>

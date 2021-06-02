@@ -32,12 +32,36 @@
 </template>
 
 <script>
+  import _ from 'lodash'
+
   export default {
     props: ['articles', 'tags'],
     data() {
-      return {
-        articles: undefined,
-        tags: undefined
+      return {}
+    },
+    created() {
+      this._ = _;
+    },
+    jsonld() {
+      try {
+        let jsnoLD = [];
+        for (let article of this.articles) {
+          // console.log('article:', article)
+          jsnoLD.push({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "datePublished": this.article.updatedAt || "",
+            "description": article.description || '',
+            "articleBody": article.body || '',
+            "author": article.author.name || '',
+            "name": article.title || ''
+          });
+          // console.log('started jsonLD')
+        }
+        // console.error('jsonLD result', {jsnoLD})
+        return jsnoLD;
+      } catch (e) {
+        console.error('jsonLD error', {e})
       }
     },
     computed: {

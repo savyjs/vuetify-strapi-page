@@ -39,6 +39,7 @@ import VspBlogAuthor from './../components/blog/VspBlogAuthor'
 import VspBlogShowList from './../components/blog/VspBlogShowList'
 import VspBlogLatestArticles from './../components/blog/VspBlogLatestArticles'
 import VspBlogShowTagList from './../components/blog/VspBlogShowTagList'
+import VspBlogAuthorPage from './../components/blog/VspBlogAuthorPage'
 
 import VspPodcastBlock from './../components/podcast/VspPodcastBlock'
 import VspPodcastList from './../components/podcast/VspPodcastList'
@@ -54,6 +55,7 @@ import VspReserveItemList from './../components/reserve/VspReserveItemList'
 import VspReserveItemPage from './../components/reserve/VspReserveItemPage'
 
 export default {
+  VspBlogAuthorPage,
   VspBlogShowTagList,
   VspReserveItemPage,
   VspContactSectionSpring,
