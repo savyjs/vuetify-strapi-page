@@ -22,6 +22,7 @@ export default async function VuetifyStrapiPageModule(moduleOptions) {
     let listOfFiles = getFiles(path.resolve(__dirname, './components'));
 
     let options = {
+      baseUrl: '',
       rtl: false,
       builder: {
         form: '/forms',

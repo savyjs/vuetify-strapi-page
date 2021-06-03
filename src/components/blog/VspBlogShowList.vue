@@ -42,26 +42,37 @@
     created() {
       this._ = _;
     },
-    jsonld() {
+    async jsonld() {
       try {
         let jsnoLD = [];
+        let breadcrumbjsnoLD = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": []
+        };
+        let i = 1;
+        let url = this.vsp.baseUrl;
         for (let article of this.articles) {
-          // console.log('article:', article)
+          breadcrumbjsnoLD['itemListElement'].push({
+            "@type": "ListItem",
+            "position": i++,
+            "name": article.title,
+            "item": url + this.contentsLink + '/' + article.slug
+          })
           jsnoLD.push({
             "@context": "https://schema.org",
             "@type": "Article",
-            "datePublished": this.article.updatedAt || "",
+            "datePublished": article.updatedAt || "",
             "description": article.description || '',
             "articleBody": article.body || '',
             "author": article.author.name || '',
             "name": article.title || ''
-          });
-          // console.log('started jsonLD')
+          })
         }
-        // console.error('jsonLD result', {jsnoLD})
+        jsnoLD.push(breadcrumbjsnoLD);
         return jsnoLD;
       } catch (e) {
-        console.error('jsonLD error', {e})
+        console.error({e})
       }
     },
     computed: {
