@@ -79,6 +79,28 @@
         return this.vsp.blog.tags || '/tags';
       },
     },
+    jsonld() {
+      try {
+        let breadcrumbjsnoLD = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": []
+        };
+        let i = 1;
+        let url = this.vsp.baseUrl;
+        for (let article of this.articles) {
+          breadcrumbjsnoLD['itemListElement'].push({
+            "@type": "ListItem",
+            "position": i++,
+            "name": article.title,
+            "item": url + this.contentsLink + '/' + article.slug
+          });
+        }
+        return breadcrumbjsnoLD;
+      } catch (e) {
+        console.error({e})
+      }
+    },
     created() {
       this._ = _;
     },

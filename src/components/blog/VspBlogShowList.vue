@@ -42,9 +42,8 @@
     created() {
       this._ = _;
     },
-    async jsonld() {
+    jsonld() {
       try {
-        let jsnoLD = [];
         let breadcrumbjsnoLD = {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
@@ -58,19 +57,9 @@
             "position": i++,
             "name": article.title,
             "item": url + this.contentsLink + '/' + article.slug
-          })
-          jsnoLD.push({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "datePublished": article.updatedAt || "",
-            "description": article.description || '',
-            "articleBody": article.body || '',
-            "author": article.author.name || '',
-            "name": article.title || ''
-          })
+          });
         }
-        jsnoLD.push(breadcrumbjsnoLD);
-        return jsnoLD;
+        return breadcrumbjsnoLD;
       } catch (e) {
         console.error({e})
       }

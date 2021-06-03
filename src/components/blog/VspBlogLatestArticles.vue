@@ -72,6 +72,34 @@
         return this.vsp.blog.tags || '/tags';
       },
     },
+    jsonld() {
+      try {
+        let breadcrumbjsnoLD = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": []
+        };
+        let i = 1;
+        let url = this.vsp.baseUrl;
+        for (let item of this.articles) {
+          breadcrumbjsnoLD['itemListElement'].push({
+            "@type": "ListItem",
+            "position": i++,
+            "name": item.title,
+            "item": url + this.contentsLink + '/' + item.slug
+          });
+        }
+        return breadcrumbjsnoLD;
+      } catch (e) {
+        console.error({e})
+      }
+    },
+
+    computed:{
+      contentsLink() {
+        return this.vsp.blog.contents || this.vsp.blog.home || '/';
+      },
+    },
     methods: {
       formatDate(date) {
         const options = {year: 'numeric', month: 'long', day: 'numeric'}

@@ -73,6 +73,28 @@
     data() {
       return {}
     },
+    jsonld() {
+      try {
+        let breadcrumbjsnoLD = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": []
+        };
+        let i = 1;
+        let url = this.vsp.baseUrl;
+        for (let article of this.articles) {
+          breadcrumbjsnoLD['itemListElement'].push({
+            "@type": "ListItem",
+            "position": i++,
+            "name": article.title,
+            "item": url + this.contentsLink + '/' + article.slug
+          });
+        }
+        return breadcrumbjsnoLD;
+      } catch (e) {
+        console.error({e})
+      }
+    },
     computed: {
       contentsLink() {
         return this.vsp.blog.contents || this.vsp.blog.home || '/';

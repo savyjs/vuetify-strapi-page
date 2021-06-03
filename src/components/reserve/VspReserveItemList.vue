@@ -28,6 +28,33 @@
         margin: 0,
       }
     },
+    jsonld() {
+      try {
+        let breadcrumbjsnoLD = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": []
+        };
+        let i = 1;
+        let url = this.vsp.baseUrl;
+        for (let item of this.items) {
+          breadcrumbjsnoLD['itemListElement'].push({
+            "@type": "ListItem",
+            "position": i++,
+            "name": item.title,
+            "item": url + this.contentsLink + '/' + item.slug
+          });
+        }
+        return breadcrumbjsnoLD;
+      } catch (e) {
+        console.error({e})
+      }
+    },
+    computed:{
+      contentsLink() {
+        return this.vsp.blog.contents || this.vsp.blog.home || '/';
+      },
+    },
     created() {
       this._ = _;
     }
