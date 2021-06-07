@@ -11,8 +11,8 @@
                         :alt="article.alt"
                 />
                 <div class="overlay"></div>
-                <div class="text-white">
-                    <span v-if="tags" v-for="(tag, id) in article.tags" :key="id">
+                <div class="text-white" v-if="tags">
+                    <span v-for="(tag, id) in article.tags" :key="id" v-if="_.has(tags,tag + '.slug')">
             <v-btn
                     outlined
                     class="mr-1"
@@ -86,6 +86,8 @@
     }
 </i18n>
 <script>
+    import _ from 'lodash';
+
     export default {
         props: ['article', 'tags', 'next', 'prev', 'params'],
         data() {
@@ -96,11 +98,11 @@
                 let jsnoLD = {
                     "@context": "https://schema.org",
                     "@type": "Article",
-                    "datePublished": this.article.updatedAt || "",
-                    "description": this.article.description || "",
-                    "articleBody": this.article.body || "",
-                    "author": this.article.author.name || "",
-                    "name": this.article.title || ''
+                    "datePublished": _.get(this.article, "updatedAt") || "",
+                    "description": _.get(this.article, "description") || "",
+                    "articleBody": _.get(this.article, "body") || "",
+                    "author": _.get(this.article, "author.name") || "",
+                    "name": _.get(this.article, "title") || ''
                 }
                 return jsnoLD;
             } catch (e) {
@@ -114,6 +116,9 @@
             tagsLink() {
                 return this.vsp.blog.tags || '/tags';
             },
+        },
+        created() {
+            this._ = _;
         },
         methods: {
             formatDate(date) {
