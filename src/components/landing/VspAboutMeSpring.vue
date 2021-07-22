@@ -38,11 +38,20 @@
       <slot/>
     </div>
     <v-card-actions>
-      <div class="d-flex justify-space-between">
-        <v-btn class="mr-2 my-2" target="_blank" fab dark small :color="row.color" :href="row.link || '#' "
-               v-for="(row,j) in (social||[])" :key="j">
-          <v-icon small>{{row.icon}}</v-icon>
-        </v-btn>
+      <div class="full">
+        <div class="full d-flex justify-space-between">
+          <div class="d-flex justify-space-between">
+            <v-btn class="mr-2 my-2" target="_blank" fab dark small :color="row.color" :href="row.link || '#' "
+                   v-for="(row,j) in (social||[])" :key="j">
+              <v-icon small>{{row.icon}}</v-icon>
+            </v-btn>
+          </div>
+          <div>
+            <v-btn :color="cta.color || 'primary'" :href="cta.link || '#' " dark  rounded>
+              <b>Message</b>
+            </v-btn>
+          </div>
+        </div>
       </div>
     </v-card-actions>
     <v-card-actions>
@@ -62,6 +71,6 @@
 </template>
 <script>
   export default {
-    props: ['name', 'rows', 'tags', 'contacts', 'img', 'social', 'footer', 'email'],
+    props: ['name', 'cta', 'rows', 'tags', 'contacts', 'img', 'social', 'footer', 'email'],
   }
 </script>
