@@ -46,7 +46,8 @@
         </v-row>
         <v-row justify="center">
           <v-col cols="12" sm="5" md="5" lg="4" class="text-center">
-            <v-btn color="success" block rounded class="mx-1 px-5" v-if="checkRecaptcha" large type="submit">
+            <v-btn color="success" block rounded class="mx-1 px-5" :loading="sendLoading" v-if="checkRecaptcha" large
+                   type="submit">
               <v-icon small class="mx-2">fa fa-send</v-icon>
               {{$t('Submit')}}
             </v-btn>
@@ -73,6 +74,7 @@
     props: ['api', 'title', 'rows', 'tags', 'contacts', 'img', 'social', 'footer', 'address', 'phone', 'email'],
     data() {
       return {
+        sendLoading: false,
         main: {}
       }
     },
@@ -92,12 +94,15 @@
         if (Object.keys(this.main).length < 1) {
           return this.$swal.fire({icon: 'warning', text: this.$t('FILL_FORM')});
         }
+        this.sendLoading = true;
         this.$axios.$post(this.api, {...this.main}).then(res => {
           this.$swal.fire({icon: 'check', text: this.$t('SENT')})
           this.main = {}
         }).catch(error => {
           this.$swal.fire({icon: 'warning', text: this.$t('ERROR')})
           console.error({error})
+        }).finally(() => {
+          this.sendLoading = false;
         })
       }
     }
