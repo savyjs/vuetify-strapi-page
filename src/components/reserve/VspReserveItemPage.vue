@@ -150,14 +150,14 @@
     },
     head() {
       return {
-        title: _.get(this.article, 'title', "") || "",
+        title: _.get(this.article, 'title', _.get(this.item, 'title', '')) || "",
         meta: [
           {
             hid: "description",
             name: "description",
-            content: _.get(this.article, 'description'),
+            content: _.get(this.article, 'description',_.get(this.item, 'subtitle', '')),
           },
-          {hid: "og-title", property: "og:title", content: _.get(this.article, 'title', "")},
+          {hid: "og-title", property: "og:title", content: _.get(this.article, 'title', _.get(this.item, 'title', ''))},
           {
             hid: "og-image",
             property: "og:image",
