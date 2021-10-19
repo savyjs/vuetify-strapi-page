@@ -32,7 +32,7 @@
           {{title || 'Contact Form'}}
         </b>
       </div>
-      <v-form lazy-validation ref="submitForm">
+      <v-form lazy-validation @submit.prevent="submitForm">
         <v-row justify="center">
           <v-col cols="12" sm="10" md="8" lg="7" justify="center">
             <div>
@@ -40,13 +40,14 @@
             </div>
           </v-col>
           <v-col cols="12" sm="10" md="8" lg="7" justify="center">
-            <v-text-field filled dense outlined label="Email" v-model="main.email"/>
-            <v-textarea filled dense outlined label="Message" v-model="main.message"/>
+            <v-text-field filled dense outlined required label="Email" v-model="main.email"/>
+            <v-textarea filled dense outlined label="Message" required v-model="main.message"/>
           </v-col>
         </v-row>
         <v-row justify="center">
           <v-col cols="12" sm="5" md="5" lg="4" class="text-center">
-            <v-btn color="success" block rounded class="mx-1 px-5" large @click="submitForm">
+            <v-btn color="success" block rounded class="mx-1 px-5" :loading="sendLoading" v-if="checkRecaptcha" large
+                   type="submit">
               <v-icon small class="mx-2">fa fa-send</v-icon>
               {{$t('Submit')}}
             </v-btn>
@@ -56,27 +57,53 @@
     </div>
   </v-card>
 </template>
+<i18n>
+  {
+  "en":{
+  "SENT":"Your message sent successfully",
+  "ERROR":"Sorry, an error occurred",
+  "FILL_FORM":"Please fill out the form"
+  },
+  "fa":{
+  "SENT": "پیام شما با موفقیت ارسال شد"
+  }
+  }
+</i18n>
 <script>
   export default {
     props: ['api', 'title', 'rows', 'tags', 'contacts', 'img', 'social', 'footer', 'address', 'phone', 'email'],
     data() {
       return {
+        sendLoading: false,
         main: {}
       }
     },
     methods: {
-      async submitForm() {
+      async checkRecaptcha() {
         try {
-          const token = await this.$recaptcha.getResponse()
-          console.log('ReCaptcha token:', token)
-
+          this.main.token = await this.$recaptcha.getResponse()
           // send token to server alongside your form data
-
           // at the end you need to reset recaptcha
-          await this.$recaptcha.reset()
+          return true;
         } catch (error) {
-          console.log('Login error:', error)
+          console.log('Login error:', {error})
+          return false;
         }
+      },
+      async submitForm() {
+        if (Object.keys(this.main).length < 1) {
+          return this.$swal.fire({icon: 'warning', text: this.$t('FILL_FORM')});
+        }
+        this.sendLoading = true;
+        this.$axios.$post(this.api, {...this.main}).then(res => {
+          this.$swal.fire({icon: 'check', text: this.$t('SENT')})
+          this.main = {}
+        }).catch(error => {
+          this.$swal.fire({icon: 'warning', text: this.$t('ERROR')})
+          console.error({error})
+        }).finally(() => {
+          this.sendLoading = false;
+        })
       }
     }
   }
