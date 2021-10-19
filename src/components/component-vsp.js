@@ -48,6 +48,7 @@ import VspPodcastShow from './../components/podcast/VspPodcastShow'
 
 import VspLandingSpring from './../components/landing/VspLandingSpring'
 import VspAboutMeSpring from './../components/landing/VspAboutMeSpring'
+import VspServicesSpring from './../components/landing/VspServicesSpring'
 import VspContactSectionSpring from './../components/landing/VspContactSectionSpring'
 
 import VspReserveItemCard from './../components/reserve/VspReserveItemCard'
@@ -55,6 +56,7 @@ import VspReserveItemList from './../components/reserve/VspReserveItemList'
 import VspReserveItemPage from './../components/reserve/VspReserveItemPage'
 
 export default {
+  VspServicesSpring,
   VspBlogAuthorPage,
   VspBlogShowTagList,
   VspReserveItemPage,

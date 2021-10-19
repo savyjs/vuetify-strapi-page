@@ -30,23 +30,23 @@
       items: Array,
       cols: {
         type: Number,
-        default: '12'
+        default: 12
       },
       sm: {
         type: Number,
-        default: '6'
+        default: 6
       },
       md: {
         type: Number,
-        default: '4'
+        default: 4
       },
       lg: {
         type: Number,
-        default: '3'
+        default: 3
       },
       xl: {
         type: Number,
-        default: '2'
+        default: 2
       },
     },
     data() {
