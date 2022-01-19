@@ -20,8 +20,8 @@
           <v-card-actions>
             <small class="pb-4 overline" v-if="article.updatedAt">{{ formatDate(article.updatedAt) }}</small>
             <v-spacer/>
-            <small>
-              <v-icon class="mx-1">history_edu</v-icon>
+            <small v-if="article.author.name">
+              <v-icon class="mx-1" small>edit</v-icon>
               {{ article.author.name }}</small>
           </v-card-actions>
         </v-col>
