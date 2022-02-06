@@ -4,7 +4,7 @@
       <v-app-bar elevation="1" app>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer/>
-        <span style="max-height: 100%;">
+        <span style="max-height: 100%;max-width:20%;">
           <nuxt-link
             style="max-height: 100%;text-decoration: none"
             exact-active-class=""
