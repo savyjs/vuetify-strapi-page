@@ -9,8 +9,8 @@
         >
         </v-img>
       </v-col>
-      <v-col>
-        <table class="oddTable">
+      <v-col cols="12" sm="7" md="9" lg="10">
+        <table class="oddTableNoPadding">
           <tbody>
           <tr v-for="(row,j) in (rows||[])" :key="j">
             <td v-if="row.icon">

@@ -23,21 +23,30 @@
   direction: ltr !important;
 }
 
-.oddTable {
+.oddTable, .oddTableNoPadding {
   width: 100%;
 }
 
-.oddTable tr:nth-child(even) {
+.oddTableNoPadding tr:nth-child(even), .oddTable tr:nth-child(even) {
   background: rgba(0, 0, 0, 0.04);
 }
 
 .oddTable tr td {
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px;
 }
 
 .oddTable tr td:first-child {
   font-weight: bold;
   padding-left: 30px;
+}
+
+.oddTableNoPadding tr td {
+  padding: 0;
+}
+
+.oddTableNoPadding tr td:first-child {
+  font-weight: bold;
+  padding-left: 0;
 }
 
 .oddContainer {

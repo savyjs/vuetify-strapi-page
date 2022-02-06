@@ -15,7 +15,7 @@
         <span class="mr-1" v-for="(image,i) in _.get(item,'tagImages',[])" :key="i"><v-img :src="image"/></span>
       </div>
     </v-card-actions>
-    <div class="d-flex justify-space-between">
+    <div class="d-flex justify-space-between pl-3">
       <span><v-icon v-if="item.stars" v-for="j in item.stars" color="warning" small class="mx-1" :key="j">star</v-icon></span>
       <span class="font-12">
         <b class="px-3 mx-1 teal--text" v-if="!item.discount && item.price">{{ _.isNumber(item.price) ? $Helper.price(item.price,item.unit || '$') :
@@ -30,17 +30,17 @@
     </div>
     <v-spacer/>
     <v-card-text>
-      <div class="d-flex justify-space-around mb-2 text-start">
+      <div class="d-flex mb-2 text-start">
         <h2>{{item.title}}</h2>
       </div>
-      <table class="oddTable">
+      <table class="oddTableNoPadding">
         <tbody>
         <tr v-if="item.subTitle">
           <td class="text-start">
             <h3>{{item.subTitle}}</h3>
           </td>
         </tr>
-        <tr v-for="(row,key) in _.get(item,'rows',[])" :key="key">
+        <tr class="py-5" v-for="(row,key) in _.get(item,'rows',[])" :key="key">
           <td v-if="row.title">
             {{row.title || ''}}
           </td>
