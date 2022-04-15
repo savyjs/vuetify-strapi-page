@@ -37,7 +37,7 @@
         };
         let i = 1;
         let url = this.vsp.baseUrl;
-        for (let item of this.items) {
+        for (let item of this.items || []) {
           breadcrumbjsnoLD['itemListElement'].push({
             "@type": "ListItem",
             "position": i++,

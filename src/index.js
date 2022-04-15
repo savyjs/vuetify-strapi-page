@@ -1,6 +1,3 @@
-import webpack from "webpack";
-import {sortRoutes} from '@nuxt/utils'
-
 const fs = require('fs')
 const path = require('path')
 const _ = require('lodash')
