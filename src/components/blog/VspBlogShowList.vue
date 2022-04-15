@@ -69,10 +69,6 @@ import _ from 'lodash'
       } catch (e) {
         console.error({e})
       }
-      return breadcrumbjsnoLD;
-    } catch (e) {
-      console.error({e})
-    }
   },
   methods: {
     formatDate(date) {
