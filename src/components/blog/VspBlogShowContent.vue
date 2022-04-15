@@ -34,7 +34,7 @@
         cols="12"
         md="8"
       >
-        <h1 class="font-bold text-4xl">{{ article.title }}</h1>
+        <h1 class="font-bold text-4xl">{{ article.title || "" }}</h1>
         <p>{{ article.description || "" }}</p>
         <p class="pb-4" v-if="article.updatedAt">{{ formatDate(article.updatedAt) }}</p>
         <!-- table of contents -->
