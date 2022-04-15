@@ -7,6 +7,7 @@
       >
         <v-img
           contain
+          v-if="article.img"
           :src="article.img"
           :alt="article.alt"
         />
@@ -26,7 +27,7 @@
         </div>
         <!-- content author component -->
         <div class="my-5">
-          <vsp-blog-author :author="article.author"/>
+          <vsp-blog-author v-if="article.author" :author="article.author"/>
         </div>
       </v-col>
       <v-col
@@ -34,8 +35,8 @@
         md="8"
       >
         <h1 class="font-bold text-4xl">{{ article.title }}</h1>
-        <p>{{ article.description }}</p>
-        <p class="pb-4">{{ formatDate(article.updatedAt) }}</p>
+        <p>{{ article.description || "" }}</p>
+        <p class="pb-4" v-if="article.updatedAt">{{ formatDate(article.updatedAt) }}</p>
         <!-- table of contents -->
         <nav class="pb-6">
           <ul>

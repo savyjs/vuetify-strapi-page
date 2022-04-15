@@ -11,12 +11,12 @@
       <v-row>
         <v-col cols="12" md="9">
           <v-card-title>
-            <h2 class="font-bold">{{ article.title }}</h2>
+            <h2 v-if="article.description" class="font-bold">{{ article.title }}</h2>
             <v-spacer/>
-            <small>{{ article.author.name }}</small>
+            <small v-if="article.author">{{ article.author.name || "" }}</small>
           </v-card-title>
-          <v-card-text class="py-5 font-bold text-gray-600 text-sm">
-            {{ article.description }}
+          <v-card-text v-if="article.description" class="py-5 font-bold text-gray-600 text-sm">
+            {{ article.description || "" }}
           </v-card-text>
         </v-col>
         <v-col cols="12" md="3">
@@ -55,7 +55,7 @@
           breadcrumbjsnoLD['itemListElement'].push({
             "@type": "ListItem",
             "position": i++,
-            "name": article.title,
+            "name": article.title || "",
             "item": url + this.contentsLink + '/' + article.slug
           });
         }
