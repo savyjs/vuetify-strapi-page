@@ -17,10 +17,10 @@
               <h2 class="font-bold font-13">{{ article.title }}</h2>
               <v-subheader v-if="article.updatedAt">{{formatDate(article.updatedAt)}}</v-subheader>
               <v-spacer/>
-              <small>{{ article.author.name }}</small>
+              <small v-if="article.author">{{ article.author.name || "" }}</small>
             </v-card-title>
-            <v-card-text class="py-5 font-bold text-gray-600 text-sm">
-              {{ article.description }}
+            <v-card-text v-if="article.description" class="py-5 font-bold text-gray-600 text-sm">
+              {{ article.description || "" }}
             </v-card-text>
           </v-col>
           <v-col cols="12" md="3" v-if="article.img">
@@ -32,6 +32,7 @@
           <v-col cols="12">
             <v-chip v-if="article.tags" v-for="(tag, id) in article.tags" :key="id">
               <v-btn
+                v-if="tags[tag].name"
                 outlined
                 class="mr-1"
                 rounded
@@ -93,12 +94,6 @@
       } catch (e) {
         console.error({e})
       }
-    },
-
-    computed:{
-      contentsLink() {
-        return this.vsp.blog.contents || this.vsp.blog.home || '/';
-      },
     },
     methods: {
       formatDate(date) {

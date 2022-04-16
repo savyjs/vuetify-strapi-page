@@ -12,7 +12,6 @@
         <v-col cols="12" md="9">
           <v-card-title>
             <h2 class="text-h5">{{ article.title }}</h2>
-
           </v-card-title>
           <v-card-text v-if="article.description" class="py-5 font-bold text-gray-600 text-sm">
             {{ article.description || "" }}
@@ -20,7 +19,7 @@
           <v-card-actions>
             <small class="pb-4 overline" v-if="article.updatedAt">{{ formatDate(article.updatedAt) }}</small>
             <v-spacer/>
-            <small v-if="article.author.name">
+            <small v-if="article.author">
               <v-icon class="mx-1" small>edit</v-icon>
               {{ article.author.name }}</small>
           </v-card-actions>
