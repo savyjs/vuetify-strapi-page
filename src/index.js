@@ -11,6 +11,7 @@ import {
   addPluginTemplate,
   AddPluginOptions,
   isNuxt2,
+  isNuxt3,
   createResolver,
   resolvePath
 } from '@nuxt/kit'
@@ -35,7 +36,7 @@ export default defineNuxtModule({
       }
 
       try {
-        const componentsList = await resolvePath(__dirname + '/' + 'components');
+        const componentsList = await resolvePath(__dirname + '/nuxt2/' + 'components');
         let listOfFiles = await getFiles(componentsList);
         // return console.log({componentsList, listOfFiles})
         let options = {
@@ -74,7 +75,7 @@ export default defineNuxtModule({
         try {
           addPlugin({
             fileName: 'VspOptions.js',
-            src: await resolvePath(__dirname + '/' + 'VspOptions.js'),
+            src: await resolvePath(__dirname + '/nuxt2/' + 'VspOptions.js'),
             options
           })
         } catch (e) {
@@ -86,7 +87,7 @@ export default defineNuxtModule({
           let pName = 'components/' + componentName;
           addTemplate({
             fileName: pName,
-            src: await resolvePath(__dirname + '/' + pName),
+            src: await resolvePath(__dirname + '/nuxt2/' + pName),
             options
           })
         }
@@ -127,57 +128,57 @@ export default defineNuxtModule({
 
         addTemplate({
           fileName: 'assets/vsp.png',
-          src: await resolvePath(__dirname + '/' + 'assets/vsp.png')
+          src: await resolvePath(__dirname + '/nuxt2/' + 'assets/vsp.png')
         })
 
         addTemplate({
           fileName: 'assets/avatar.png',
-          src: await resolvePath(__dirname + '/' + 'assets/avatar.png')
+          src: await resolvePath(__dirname + '/nuxt2/' + 'assets/avatar.png')
         })
 
         addTemplate({
           fileName: 'assets/VspStyles.css',
-          src: await resolvePath(__dirname + '/' + 'assets/VspStyles.css')
+          src: await resolvePath(__dirname + '/nuxt2/' + 'assets/VspStyles.css')
         })
         addTemplate({
           fileName: 'assets/VspVariables.sass',
-          src: await resolvePath(__dirname + '/' + 'assets/VspVariables.sass')
+          src: await resolvePath(__dirname + '/nuxt2/' + 'assets/VspVariables.sass')
         })
 
         addTemplate({
           fileName: 'components/component-vsp.js',
-          src: await resolvePath(__dirname + '/' + 'components/component-vsp.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'components/component-vsp.js'),
           options
         })
 
         addTemplate({
           fileName: 'assets/VspHelper.js',
-          src: await resolvePath(__dirname + '/' + 'assets/VspHelper.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'assets/VspHelper.js'),
           options
         })
 
 
         addTemplate({
           fileName: 'store/Vsp.js',
-          src: await resolvePath(__dirname + '/' + 'store/Vsp.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'store/Vsp.js'),
           options
         })
 
         addTemplate({
           fileName: 'store/VspCart.js',
-          src: await resolvePath(__dirname + '/' + 'store/VspCart.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'store/VspCart.js'),
           options
         })
 
         addTemplate({
           fileName: 'store/VspShopping.js',
-          src: await resolvePath(__dirname + '/' + 'store/VspShopping.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'store/VspShopping.js'),
           options
         })
 
         addPlugin({
           fileName: 'VspPlugin.js',
-          src: await resolvePath(__dirname + '/' + 'VspPlugin.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'VspPlugin.js'),
           options
         })
 
@@ -197,62 +198,60 @@ export default defineNuxtModule({
         addPlugin({
           fileName: 'VspClientPlugin.js',
           mode: 'client',
-          src: await resolvePath(__dirname + '/' + 'VspClientPlugin.js'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'VspClientPlugin.js'),
           options
         })
 
         moduleContainer.addLayout({
           name: "vsp",
-          src: await resolvePath(__dirname + '/' + 'layout/vsp.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vsp.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspSpring",
-          src: await resolvePath(__dirname + '/' + 'layout/vspSpring.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspSpring.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspReservation",
-          src: await resolvePath(__dirname + '/' + 'layout/vspReservation.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspReservation.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspReservationItem",
-          src: await resolvePath(__dirname + '/' + 'layout/vspReservationItem.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspReservationItem.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspPodcastBlog",
-          src: await resolvePath(__dirname + '/' + 'layout/vspPodcastBlog.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspPodcastBlog.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspSimple",
-          src: await resolvePath(__dirname + '/' + 'layout/vspSimple.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspSimple.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspShop",
-          src: await resolvePath(__dirname + '/' + 'layout/vspShop.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspShop.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspBlog",
-          src: await resolvePath(__dirname + '/' + 'layout/vspBlog.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspBlog.vue'),
         })
 
         moduleContainer.addLayout({
           name: "vspAuth",
-          src: await resolvePath(__dirname + '/' + 'layout/vspAuth.vue'),
+          src: await resolvePath(__dirname + '/nuxt2/' + 'layout/vspAuth.vue'),
         })
 
       } catch (e) {
         console.error({e})
       }
-    } else {
+    } else if (isNuxt3()) {
       await installModule('@nuxtjs/tailwindcss')
     }
   }
 });
-
-module.exports.meta = require('../package.json')
