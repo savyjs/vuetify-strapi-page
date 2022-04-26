@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Vue from 'vue'
-import moduleOptions from './options'
+import moduleOptions from './VspOptions'
 // import '@fontawesome/fontawesome-free/css/all.css'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'

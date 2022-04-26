@@ -163,6 +163,11 @@ export default {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown || false;
     },
+    isRTL() {
+      let isRTL = _.get(this, 'vsd.rtl', undefined);
+      let dir = _.get(this, '$i18n.localeProperties.dir', 'ltr');
+      return isRTL === undefined ? dir === 'rtl' : !!isRTL;
+    },
   },
   methods: {
     capitalize(s) {

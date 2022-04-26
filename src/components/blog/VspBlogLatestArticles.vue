@@ -15,7 +15,7 @@
           <v-col cols="12" :md="article.img ? 9 : 12">
             <v-card-title>
               <h2 class="font-bold font-13">{{ article.title }}</h2>
-              <v-subheader v-if="article.updatedAt">{{formatDate(article.updatedAt)}}</v-subheader>
+              <v-subheader v-if="article.updatedAt">{{ formatDate(article.updatedAt) }}</v-subheader>
               <v-spacer/>
               <small v-if="article.author">{{ article.author.name || "" }}</small>
             </v-card-title>
@@ -50,72 +50,73 @@
 </template>
 
 <i18n>
-  {
-  "en":{
-  "article_not_found" : "post not found (404)."
+{
+  "en": {
+    "article_not_found": "post not found (404)."
   },
-  "fa":{
-  "article_not_found": "مقاله پیدا نشد (۴۰۴)"
+  "fa": {
+    "article_not_found": "مقاله پیدا نشد (۴۰۴)"
   }
-  }
+}
 </i18n>
 <script>
-  export default {
-    props: ['articles', 'tags'],
-    data() {
-      return {}
+import _ from 'lodash';
+export default {
+  props: ['articles', 'tags'],
+  data() {
+    return {}
+  },
+  computed: {
+    contentsLink() {
+      return _.get(this.vsp, 'blog.contents', _.get(this.vsp, 'blog.home', '/'));
     },
-    computed: {
-      contentsLink() {
-        return this.vsp.blog.contents || this.vsp.blog.home || '/';
-      },
-      tagsLink() {
-        return this.vsp.blog.tags || '/tags';
-      },
+    tagsLink() {
+      return _.get(this.vsp, 'blog.tags', '/tags');
     },
-    jsonld() {
-      try {
-        let breadcrumbjsnoLD = {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": []
-        };
-        let i = 1;
-        let url = this.vsp.baseUrl;
-        for (let item of this.articles) {
-          breadcrumbjsnoLD['itemListElement'].push({
-            "@type": "ListItem",
-            "position": i++,
-            "name": item.title,
-            "item": url + this.contentsLink + '/' + item.slug
-          });
-        }
-        return breadcrumbjsnoLD;
-      } catch (e) {
-        console.error({e})
+  },
+  jsonld() {
+    try {
+      let breadcrumbjsnoLD = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": []
+      };
+      let i = 1;
+      let url = this.vsp.baseUrl;
+      for (let item of this.articles) {
+        breadcrumbjsnoLD['itemListElement'].push({
+          "@type": "ListItem",
+          "position": i++,
+          "name": item.title,
+          "item": url + this.contentsLink + '/' + item.slug
+        });
       }
-    },
-    methods: {
-      formatDate(date) {
-        const options = {year: 'numeric', month: 'long', day: 'numeric'}
-        return new Date(date).toLocaleDateString('en', options)
-      }
+      return breadcrumbjsnoLD;
+    } catch (e) {
+      console.error({e})
     }
-
+  },
+  methods: {
+    formatDate(date) {
+      const options = {year: 'numeric', month: 'long', day: 'numeric'}
+      return new Date(date).toLocaleDateString('en', options)
+    }
   }
+
+}
 </script>
 
 <style class="postcss">
-  .article-card {
-    border-radius: 8px;
-  }
+.article-card {
+  border-radius: 8px;
+}
 
-  .article-card a {
-    background-color: #fff;
-    border-radius: 8px;
-  }
+.article-card a {
+  background-color: #fff;
+  border-radius: 8px;
+}
 
-  .article-card img div {
-    border-radius: 8px 0 0 8px;
-  }
+.article-card img div {
+  border-radius: 8px 0 0 8px;
+}
 </style>

@@ -1,36 +1,43 @@
-const fs = require('fs')
-const path = require('path')
-const _ = require('lodash')
-
 import {
   defineNuxtModule,
   installModule,
   addTemplate,
+  addPlugin,
+  useModuleContainer,
+  addComponent,
   addServerMiddleware,
   resolveAlias,
   requireModule,
+  addPluginTemplate,
+  AddPluginOptions,
   isNuxt2,
   createResolver,
   resolvePath
 } from '@nuxt/kit'
 
-const getFiles = path => {
-  const files = []
-  for (const file of fs.readdirSync(path)) {
-    const fullPath = path + '/' + file
-    if (fs.lstatSync(fullPath).isDirectory())
-      getFiles(fullPath).forEach(x => files.push(file + '/' + x))
-    else files.push(file)
-  }
-  return files
-}
 export default defineNuxtModule({
   async setup(moduleOptions, nuxt = {}) {
 
     if (isNuxt2()) {
-      try {
-        let listOfFiles = getFiles(path.resolve(__dirname, './components'));
+      const fs = await import('fs')
+      const _ = await import('lodash')
+      const moduleContainer = useModuleContainer(nuxt);
 
+      const getFiles = path => {
+        const files = []
+        for (const file of fs.readdirSync(path)) {
+          const fullPath = path + '/' + file
+          if (fs.lstatSync(fullPath).isDirectory())
+            getFiles(fullPath).forEach(x => files.push(file + '/' + x))
+          else files.push(file)
+        }
+        return files
+      }
+
+      try {
+        const componentsList = await resolvePath(__dirname + '/' + 'components');
+        let listOfFiles = await getFiles(componentsList);
+        // return console.log({componentsList, listOfFiles})
         let options = {
           baseUrl: '',
           rtl: false,
@@ -57,132 +64,120 @@ export default defineNuxtModule({
 
         if (_.get(options, 'axios', true)) {
           let axiosOptions = _.get(this, 'nuxt.options.axios', {});
-          this.addModule({
-            src: "@nuxtjs/axios",
-            options: {
-              ...axiosOptions
-            }
-          });
+          installModule("@nuxtjs/axios", {...axiosOptions});
         }
 
         let baseURL = _.get(this, 'nuxt.options.axios.baseURL', _.get(process, 'env.API_URL', ''));
         options.API_URL = baseURL;
 
-        this.addPlugin({
-          fileName: 'VspOptions.js',
-          src: path.resolve(__dirname, 'VspOptions.js'),
-          options
-        })
 
+        try {
+          addPlugin({
+            fileName: 'VspOptions.js',
+            src: await resolvePath(__dirname + '/' + 'VspOptions.js'),
+            options
+          })
+        } catch (e) {
+          console.warn({e})
+        }
+
+        // return console.log({listOfFiles})
         for (const componentName of listOfFiles) {
           let pName = 'components/' + componentName;
-          this.addTemplate({
+          addTemplate({
             fileName: pName,
-            src: path.resolve(__dirname, pName),
+            src: await resolvePath(__dirname + '/' + pName),
             options
           })
         }
 
         if (_.get(options, 'sweetalert', true)) {
-          this.addModule({
-            src: "nuxt-sweetalert2"
-          });
+          installModule("nuxt-sweetalert2");
         }
 
-        this.nuxt.options.store = true;
-        if (_.get(options, 'i18n', true)) {
+        nuxt.options.store = true;
+        if (_.get(options, 'i18n', false)) {
           let i18nOption = _.get(this, 'nuxt.options.i18n', {});
           let i18nOptionLocales = _.get(this, 'nuxt.options.i18n.locales', {});
-          this.addModule({
-            src: "nuxt-i18n",
-            options: {
-              vueI18nLoader: true,
-              defaultLocale: _.get(moduleOptions, 'lang', 'en'),
-              ...i18nOption
-            }
+          installModule("nuxt-i18n", {
+            vueI18nLoader: true,
+            defaultLocale: _.get(moduleOptions, 'lang', 'en'),
+            ...i18nOption
           });
         }
 
         if (_.get(options, 'auth', true)) {
           let authOptions = _.get(this, 'nuxt.options.auth', {});
-          this.addModule({
-            src: "@nuxtjs/auth",
-            options: {
-              ...authOptions
-            }
+          installModule("@nuxtjs/auth", {
+            ...authOptions
           });
         }
 
         if (_.get(options, 'recaptcha', true)) {
           let recaptchaOptions = _.get(this, 'nuxt.options.recaptcha', {});
-          this.addModule({
-            src: "@nuxtjs/recaptcha"
-          });
+          installModule("@nuxtjs/recaptcha");
         }
 
         if (_.get(options, 'strapi', true)) {
           let strapiOptions = _.get(this, 'nuxt.options.strapi', {});
-          this.addModule({
-            src: "@nuxtjs/strapi",
-            options: {
-              ...strapiOptions
-            }
+          installModule("@nuxtjs/strapi", {
+            ...strapiOptions
           });
         }
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'assets/vsp.png',
-          src: path.resolve(__dirname, 'assets/vsp.png')
+          src: await resolvePath(__dirname + '/' + 'assets/vsp.png')
         })
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'assets/avatar.png',
-          src: path.resolve(__dirname, 'assets/avatar.png')
+          src: await resolvePath(__dirname + '/' + 'assets/avatar.png')
         })
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'assets/VspStyles.css',
-          src: path.resolve(__dirname, 'assets/VspStyles.css')
+          src: await resolvePath(__dirname + '/' + 'assets/VspStyles.css')
         })
-        this.addTemplate({
+        addTemplate({
           fileName: 'assets/VspVariables.sass',
-          src: path.resolve(__dirname, 'assets/VspVariables.sass')
+          src: await resolvePath(__dirname + '/' + 'assets/VspVariables.sass')
         })
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'components/component-vsp.js',
-          src: path.resolve(__dirname, 'components/component-vsp.js'),
+          src: await resolvePath(__dirname + '/' + 'components/component-vsp.js'),
           options
         })
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'assets/VspHelper.js',
-          src: path.resolve(__dirname, 'assets/VspHelper.js'),
+          src: await resolvePath(__dirname + '/' + 'assets/VspHelper.js'),
           options
         })
 
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'store/Vsp.js',
-          src: path.resolve(__dirname, 'store/Vsp.js'),
+          src: await resolvePath(__dirname + '/' + 'store/Vsp.js'),
           options
         })
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'store/VspCart.js',
-          src: path.resolve(__dirname, 'store/VspCart.js'),
+          src: await resolvePath(__dirname + '/' + 'store/VspCart.js'),
           options
         })
 
-        this.addTemplate({
+        addTemplate({
           fileName: 'store/VspShopping.js',
-          src: path.resolve(__dirname, 'store/VspShopping.js'),
+          src: await resolvePath(__dirname + '/' + 'store/VspShopping.js'),
           options
         })
 
-        this.addPlugin({
+        addPlugin({
           fileName: 'VspPlugin.js',
-          src: path.resolve(__dirname, 'VspPlugin.js'),
+          src: await resolvePath(__dirname + '/' + 'VspPlugin.js'),
           options
         })
 
@@ -199,91 +194,56 @@ export default defineNuxtModule({
           ...moduleOptions.blog
         };
 
-        this.extendRoutes(
-          (routes, resolve) => {
-            const blogRoute = {};
-            blogRoutes.Home = {
-              name: 'blogHome',
-              chunkName: 'blogHome',
-              path: blogRoutes.home,
-              component: resolve(__dirname, './src/components/blog/VspBlogShowList.vue'),
-            }
-            blogRoutes.Posts = {
-              name: 'blogPosts',
-              chunkName: 'blogPosts',
-              path: blogRoutes.contents,
-              component: resolve(__dirname, './src/components/blog/VspBlogShowList.vue'),
-            }
-            blogRoutes.Post = {
-              name: 'blogPost',
-              chunkName: 'blogPost',
-              path: blogRoutes.contents + '/:slug',
-              component: resolve(__dirname, './src/components/blog/VspBlogShowContent.vue'),
-            }
-            blogRoutes.Tags = {
-              name: 'blogTags',
-              chunkName: 'blogTags',
-              path: blogRoutes.tags + '/:slug',
-              component: resolve(__dirname, './src/components/blog/VspBlogShowTagPage.vue'),
-            }
-
-            for (const item in blogRoute) {
-              console.log({item})
-              routes.unshift(item)
-            }
-          }
-        );
-
-        this.addPlugin({
+        addPlugin({
           fileName: 'VspClientPlugin.js',
           mode: 'client',
-          src: path.resolve(__dirname, 'VspClientPlugin.js'),
+          src: await resolvePath(__dirname + '/' + 'VspClientPlugin.js'),
           options
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vsp",
-          src: path.resolve(__dirname, 'layout/vsp.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vsp.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspSpring",
-          src: path.resolve(__dirname, 'layout/vspSpring.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspSpring.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspReservation",
-          src: path.resolve(__dirname, 'layout/vspReservation.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspReservation.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspReservationItem",
-          src: path.resolve(__dirname, 'layout/vspReservationItem.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspReservationItem.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspPodcastBlog",
-          src: path.resolve(__dirname, 'layout/vspPodcastBlog.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspPodcastBlog.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspSimple",
-          src: path.resolve(__dirname, 'layout/vspSimple.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspSimple.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspShop",
-          src: path.resolve(__dirname, 'layout/vspShop.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspShop.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspBlog",
-          src: path.resolve(__dirname, 'layout/vspBlog.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspBlog.vue'),
         })
 
-        this.addLayout({
+        moduleContainer.addLayout({
           name: "vspAuth",
-          src: path.resolve(__dirname, 'layout/vspAuth.vue'),
+          src: await resolvePath(__dirname + '/' + 'layout/vspAuth.vue'),
         })
 
       } catch (e) {

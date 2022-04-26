@@ -77,10 +77,10 @@ import _ from 'lodash'
   },
   computed: {
     contentsLink() {
-      return this.vsp.blog.contents || this.vsp.blog.home || '/';
+      return _.get(this.vsp, 'blog.contents', _.get(this.vsp, 'blog.home', '/'));
     },
     tagsLink() {
-      return this.vsp.blog.tags || '/tags';
+      return _.get(this.vsp, 'blog.tags', '/tags');
     },
   },
 }

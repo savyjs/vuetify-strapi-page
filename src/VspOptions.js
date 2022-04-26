@@ -1,1 +1,3 @@
-export default <%= serialize(options) %>
+export default async function (nuxt) {
+  console.log(nuxt.options)
+}
