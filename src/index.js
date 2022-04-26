@@ -290,7 +290,7 @@ export default defineNuxtModule({
         console.error({e})
       }
     } else {
-      await installModule('@nuxt/tailwindcss')
+      await installModule('@nuxtjs/tailwindcss')
     }
   }
 });
