@@ -84,15 +84,10 @@ export default defineNuxtModule({
         installModule("nuxt-sweetalert2");
       }
 
-      nuxt.options.store = true;
+      moduleContainer.nuxt.options.store = true;
       if (_.get(options, 'i18n', true)) {
         let i18nOption = _.get(nuxt, 'options.i18n', {});
         let i18nOptionLocales = _.get(nuxt, 'options.i18n.locales', {});
-        moduleContainer.addModule("@nuxtjs/i18n", {
-          vueI18nLoader: true,
-          defaultLocale: _.get(options, 'lang', 'en'),
-          ...i18nOption
-        });
       }
 
       if (_.get(options, 'auth', true)) {
