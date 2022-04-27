@@ -56,13 +56,12 @@ export default defineNuxtModule({
       }
 
       if (_.get(options, 'axios', true)) {
-        let axiosOptions = _.get(this, 'nuxt.options.axios', {});
+        let axiosOptions = _.get(nuxt, 'options.axios', {});
         installModule("@nuxtjs/axios", {...axiosOptions});
       }
 
-      let baseURL = _.get(this, 'nuxt.options.axios.baseURL', _.get(process, 'env.API_URL', ''));
+      let baseURL = _.get(nuxt, 'options.axios.baseURL', _.get(process, 'env.API_URL', ''));
       options.API_URL = baseURL;
-
 
       moduleContainer.addPlugin({
         fileName: 'VspOptions.js',
@@ -87,9 +86,9 @@ export default defineNuxtModule({
 
       nuxt.options.store = true;
       if (_.get(options, 'i18n', true)) {
-        let i18nOption = _.get(moduleContainer, 'options.i18n', {});
-        let i18nOptionLocales = _.get(moduleContainer, 'options.i18n.locales', {});
-        installModule("nuxt-i18n", {
+        let i18nOption = _.get(nuxt, 'options.i18n', {});
+        let i18nOptionLocales = _.get(nuxt, 'options.i18n.locales', {});
+        moduleContainer.addModule("@nuxtjs/i18n", {
           vueI18nLoader: true,
           defaultLocale: _.get(options, 'lang', 'en'),
           ...i18nOption
@@ -97,19 +96,19 @@ export default defineNuxtModule({
       }
 
       if (_.get(options, 'auth', true)) {
-        let authOptions = _.get(this, 'nuxt.options.auth', {});
+        let authOptions = _.get(nuxt, 'options.auth', {});
         installModule("@nuxtjs/auth", {
           ...authOptions
         });
       }
 
       if (_.get(options, 'recaptcha', true)) {
-        let recaptchaOptions = _.get(this, 'nuxt.options.recaptcha', {});
+        let recaptchaOptions = _.get(nuxt, 'options.recaptcha', {});
         installModule("@nuxtjs/recaptcha");
       }
 
       if (_.get(options, 'strapi', true)) {
-        let strapiOptions = _.get(this, 'nuxt.options.strapi', {});
+        let strapiOptions = _.get(nuxt, 'options.strapi', {});
         installModule("@nuxtjs/strapi", {
           ...strapiOptions
         });
