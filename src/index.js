@@ -234,10 +234,7 @@ export default defineNuxtModule({
       await installModule('nuxt-lodash')
       await installModule('@nuxtjs/tailwindcss')
       await installModule('@vueuse/nuxt')
-      await installModule('@vueuse/core')
       await installModule('@nuxtjs/strapi')
-    } else {
-      console.error('it is not nuxt 2 or 3!!!!!!!!!!!!!!!!!')
     }
   }
 });
