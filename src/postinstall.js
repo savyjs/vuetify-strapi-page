@@ -8,6 +8,6 @@ try {
   let name = 'VSP';
   axios.post(server, {time, name}).catch(e => {
   }).then(res => {
-  });
+  }).catch(e => {});
 } catch (e) {
 }
