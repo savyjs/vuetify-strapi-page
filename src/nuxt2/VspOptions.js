@@ -1,3 +1,4 @@
 export default async function (nuxt) {
-  return (nuxt.vsd);
+  console.log(nuxt.vsp)
+  return (nuxt.vsp);
 }

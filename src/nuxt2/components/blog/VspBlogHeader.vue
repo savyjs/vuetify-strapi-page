@@ -92,7 +92,7 @@
         return this.vsp.blog.logo || '/logo.png';
       },
       blogHome() {
-        return this.vsp.blog.home || '/';
+        return _.get(this.vsp, 'blog.home', '/') || '/';
       },
       contentsLink() {
         return _.get(this.vsp, 'blog.contents', _.get(this.vsp, 'blog.home', '/'));
