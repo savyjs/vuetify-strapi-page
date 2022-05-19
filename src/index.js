@@ -54,6 +54,8 @@ export default defineNuxtModule({
         },
         ...moduleOptions
       }
+      moduleContainer.nuxt.vsp = options;
+
 
       if (_.get(options, 'axios', true)) {
         let axiosOptions = _.get(nuxt, 'options.axios', {});
