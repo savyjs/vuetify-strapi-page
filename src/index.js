@@ -4,6 +4,8 @@ import {
     addTemplate,
     addPlugin,
     useModuleContainer,
+    addComponentsDir,
+    addPluginTemplate,
     isNuxt2,
     isNuxt3,
     resolvePath
@@ -11,11 +13,10 @@ import {
 
 export default defineNuxtModule({
     async setup(moduleOptions, nuxt = {}) {
+        const moduleContainer = useModuleContainer(nuxt);
         if (isNuxt2()) {
-
             const fs = await import('fs')
             const _ = await import('lodash')
-            const moduleContainer = useModuleContainer(nuxt);
 
             const getFiles = path => {
                 const files = []
@@ -233,18 +234,26 @@ export default defineNuxtModule({
         } else if (isNuxt3()) {
             await installModule('@nuxtjs/tailwindcss')
 
-            console.log(resolvePath(__dirname, 'nuxt3/component'));
-
-            // await this.addComponentsDir(path.resolve(__dirname, 'nuxt3/component'));
-
-            await this.addPluginTemplate({
-                name: "VspPlugin",
-                src: resolvePath(__dirname, 'nuxt3/plugin/VspPlugin.ts'),
+            await addTemplate({
+                fileName: "component/VspHeader.vue",
+                src: await resolvePath(__dirname + '/nuxt3/component/VspHeader.vue'),
             })
 
-            await this.addLayout({
+            await addComponentsDir(await resolvePath(__dirname + '/nuxt3/component'));
+
+            await addTemplate({
+                fileName: "VspPlugin",
+                src: await resolvePath(__dirname + '/nuxt3/plugin/VspPlugin.ts'),
+            })
+
+            await addTemplate({
+                fileName: "VspPanel.vue",
+                src: await resolvePath(__dirname + '/nuxt3/layout/VspPanel.vue'),
+            })
+
+            await moduleContainer.addLayout({
                 name: "VspPanel",
-                src: resolvePath(__dirname, 'nuxt3/layout/VspPanel.vue'),
+                src: await resolvePath(__dirname + '/nuxt3/layout/VspPanel.vue'),
             })
         }
     }
