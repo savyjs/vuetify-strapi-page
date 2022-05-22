@@ -2,6 +2,7 @@ import {
     defineNuxtModule,
     installModule,
     isNuxt2,
+    resolvePath,
     isNuxt3
 } from '@nuxt/kit'
 
@@ -282,6 +283,20 @@ export default defineNuxtModule({
             }
         } else if (isNuxt3()) {
             await installModule('@nuxtjs/tailwindcss')
+
+            console.log(resolvePath(__dirname, 'nuxt3/component'));
+
+            // await this.addComponentsDir(path.resolve(__dirname, 'nuxt3/component'));
+
+            await this.addPluginTemplate({
+                name: "VspPlugin",
+                src: resolvePath(__dirname, 'nuxt3/plugin/VspPlugin.ts'),
+            })
+
+            await this.addLayout({
+                name: "VspPanel",
+                src: resolvePath(__dirname, 'nuxt3/layout/VspPanel.vue'),
+            })
         }
     }
 });
