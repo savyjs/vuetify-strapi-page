@@ -1,7 +1,7 @@
 {
   "name": "vuetify-strapi-page",
   "description": "vuetify dashboard page matched to strapi last version",
-  "version": "0.2.8",
+  "version": "0.2.81",
   "author": "Ehsan Afshari @savyjs <savvyversa@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -51,7 +51,6 @@
     "@vueuse/nuxt": "^8.3.1",
     "@nuxtjs/tailwindcss": "^5.0.4",
     "@nuxtjs/i18n": "^7.2.2",
-    "@nuxt/kit": "latest",
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
